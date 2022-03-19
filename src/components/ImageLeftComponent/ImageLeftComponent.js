@@ -3,6 +3,7 @@ import IconComponent from "../../IconComponent/IconComponent";
 import "./image-left-component.css";
 import * as Vibrant from "node-vibrant";
 
+
 const ImageLeftComponent = ({
   activeYear: newActiveYear = "2019",
   entityName: newEntityName,
@@ -14,6 +15,26 @@ const ImageLeftComponent = ({
   const [darkColor, setDarkColor] = useState("rgb(9, 14, 17)");
   const [entityName, setEntityName] = useState(newEntityName);
   const [activeYear, setActiveYear] = useState(newActiveYear);
+  const [description, setDescription] = useState("")
+  const [entityTitle, setEntityTitle] = useState("")
+  const [entitySubtitle, setEntitySubtitle] = useState("")
+  
+
+  
+  function getJsonFileForEntityAndYear(){
+    fetch("/resources/backgrounds/".concat(newActiveYear).concat("/descriptions.json")).then((r)=> {
+    console.log("fetching...");
+    return r.json();
+  }).then(data=>{
+    console.log(data)
+    console.log("setting description: ",data[entityName].description )
+    console.log("setting title: ",data[entityName].title )
+    console.log("setting subtitle: ",data[entityName].subtitle )
+    setDescription(data[entityName].description)
+    setEntityTitle(data[entityName].title)
+    setEntityTitle(data[entityName].subtitle)
+  })
+  }
 
   let doStuffWithPalette = (imgSrc) => {
     Vibrant.from(imgSrc).getPalette((err, palette) => {
@@ -23,6 +44,7 @@ const ImageLeftComponent = ({
   useEffect(() => {
     console.log("my props: ");
     doStuffWithPalette("./../../resources/backgrounds/"+ newActiveYear + "/" + newEntityName +".jpg");
+    getJsonFileForEntityAndYear();
   }, [newActiveYear]);
 
   useEffect(() => {
@@ -43,9 +65,11 @@ const ImageLeftComponent = ({
       ",1)"
     );
   }
+  
   useEffect(() => {
     setDominantColor(rgb(vibrantObject[0], vibrantObject[1], vibrantObject[2]));
   }, [vibrantObject, setVibrantObject]);
+  
   return (
     <div className="image-left-component">
       <div
@@ -88,26 +112,16 @@ const ImageLeftComponent = ({
       >
         <div className="description-title-container">
           <div className="title-container">
-            <div className="description-title">Component Title</div>
+            <div className="description-title">{entityTitle}</div>
             <div className="description-icon">
               <IconComponent entityName={entityName} />
             </div>
           </div>
           <div className="subtitle-container">
-            <div className="subtitle">Subtitle</div>
+            <div className="subtitle">{entitySubtitle}</div>
           </div>
           <div className="description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            condimentum dictum enim ut posuere. Donec eget diam volutpat,
-            elementum massa a, vehicula magna. Proin ornare mattis elit quis
-            fringilla. In commodo lectus sit amet felis consequat, non bibendum
-            turpis pulvinar. Cras imperdiet venenatis ex non vestibulum. Mauris
-            vehicula condimentum ipsum vel sodales. Praesent tempus rutrum
-            dapibus. Mauris varius, lectus a venenatis ultricies, orci nisi
-            consectetur tellus, sit amet elementum felis justo sed nibh. Morbi
-            sollicitudin lectus eget ligula luctus molestie. Duis vel mattis
-            risus. Sed venenatis posuere arcu in cursus. Nulla magna lectus,
-            semper quis rutrum pulvinar, condimentum nec libero.
+           {description}
           </div>
         </div>
       </div>

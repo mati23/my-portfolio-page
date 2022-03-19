@@ -14,6 +14,7 @@ const ImageRightComponent = ({
   const [darkColor, setDarkColor] = useState("rgb(9, 14, 17)");
   const [entityName, setEntityName] = useState(newEntityName);
   const [activeYear, setActiveYear] = useState(newActiveYear);
+  const [description, setDescription] = useState("jsond")
 
   let doStuffWithPalette = (imgSrc) => {
     Vibrant.from(imgSrc).getPalette((err, palette) => {
@@ -67,17 +68,7 @@ const ImageRightComponent = ({
             <div className="subtitle">Subtitle</div>
           </div>
           <div className="description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            condimentum dictum enim ut posuere. Donec eget diam volutpat,
-            elementum massa a, vehicula magna. Proin ornare mattis elit quis
-            fringilla. In commodo lectus sit amet felis consequat, non bibendum
-            turpis pulvinar. Cras imperdiet venenatis ex non vestibulum. Mauris
-            vehicula condimentum ipsum vel sodales. Praesent tempus rutrum
-            dapibus. Mauris varius, lectus a venenatis ultricies, orci nisi
-            consectetur tellus, sit amet elementum felis justo sed nibh. Morbi
-            sollicitudin lectus eget ligula luctus molestie. Duis vel mattis
-            risus. Sed venenatis posuere arcu in cursus. Nulla magna lectus,
-            semper quis rutrum pulvinar, condimentum nec libero.
+            {description}
           </div>
         </div>
       </div>
