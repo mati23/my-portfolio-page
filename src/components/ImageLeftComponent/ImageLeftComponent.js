@@ -32,7 +32,7 @@ const ImageLeftComponent = ({
     console.log("setting subtitle: ",data[entityName].subtitle )
     setDescription(data[entityName].description)
     setEntityTitle(data[entityName].title)
-    setEntityTitle(data[entityName].subtitle)
+    setEntitySubtitle(data[entityName].subtitle)
   })
   }
 
@@ -110,7 +110,7 @@ const ImageLeftComponent = ({
             "rgba(0,212,255,0) 100%)",
         }}
       >
-        <div className="description-title-container">
+        <div className="description-title-container-left">
           <div className="title-container">
             <div className="description-title">{entityTitle}</div>
             <div className="description-icon">

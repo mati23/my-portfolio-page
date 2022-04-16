@@ -1,27 +1,27 @@
 {
   "game": {
-    "title": "Red Dead Rendemption 2",
-    "subtitle": "Rockstar Games",
+    "title": "Death Stranding",
+    "subtitle": "Hideo Kojima",
     "description": "A very good game"
   },
   "movie": {
-    "title": "Parasite",
-    "subtitle": "Parasite director",
+    "title": "Silent Voice: Koe no Katachi",
+    "subtitle": "Naoko Yamada",
     "description": "A very good movie Parasite"
   },
   "song": {
-    "title": "The Dephts",
-    "subtitle": "Interpol",
+    "title": "Churchyard",
+    "subtitle": "AURORA",
     "description": "A very good song from interpol"
   },
   "album": {
-    "title": "Red Dead Rendemption 2",
-    "subtitle": "Rockstar Games",
+    "title": "Magmamemoria MMXX",
+    "subtitle": "Levante",
     "description": "A very good game"
   },
   "book": {
-    "title": "Red Dead Rendemption 2",
+    "title": "Sapiens",
     "subtitle": "Rockstar Games",
-    "description": "A very good game"
+    "description": "Yuval Harari"
   }
 }

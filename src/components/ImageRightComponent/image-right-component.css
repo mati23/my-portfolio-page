@@ -1,10 +1,9 @@
 .image-right-component{
     display: flex;
-    min-height: 28rem;
+    min-height: 32rem;
     flex-direction: row;
     padding: 0em 4em;
     color: antiquewhite;    
-    max-width: 1440px;
 }
 .icon-image-container{
     height: 100%;
@@ -18,12 +17,13 @@
     
 }
 
-.description-title-container{
+.description-title-container-right{
     min-width: 60%;
     display: flex;
     flex-direction: column;
     min-height: 2em;
     padding: 2em 3em;
+    align-items: self-end;
 }
 .title-container{
     height: 4em;
@@ -37,9 +37,9 @@
 .description-icon{
     color: antiquewhite;
 }
-.subtitle{
+.subtitle-right{
     font-size: 0.8em;
-    text-align: left;
+    text-align: right;
 }
 .description{
     padding: 2em 0;
@@ -54,4 +54,19 @@
     width: 100%;
     height: 100%;
     background-repeat: round;    
+}
+
+.subtitle-container-right{
+    margin: 1em 00em 0 00em;
+}
+
+.right-title-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.title-subtitle-description-container{
+    display: flex;
+    flex-direction: column;
+    align-items: self-end;
 }

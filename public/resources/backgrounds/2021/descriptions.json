@@ -6,7 +6,7 @@
   },
   "movie": {
     "title": "Parasite",
-    "subtitle": "Parasite director",
+    "subtitle": "Bong Joon-ho",
     "description": "A very good movie Parasite"
   },
   "song": {
@@ -15,13 +15,13 @@
     "description": "A very good song from interpol"
   },
   "album": {
-    "title": "Red Dead Rendemption 2",
-    "subtitle": "Rockstar Games",
+    "title": "A Real Good Person in a Real Bad Place",
+    "subtitle": "Des Rocs",
     "description": "A very good game"
   },
   "book": {
-    "title": "Red Dead Rendemption 2",
-    "subtitle": "Rockstar Games",
+    "title": "Kafka on the Shore",
+    "subtitle": "Haruki Murakami",
     "description": "A very good game"
   }
 }

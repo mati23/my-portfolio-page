@@ -7,24 +7,54 @@ const ImageRightComponent = ({
   activeYear: newActiveYear = "2019",
   entityName: newEntityName,
 }) => {
-  const ColorThief = require("colorthief");  
+  const ColorThief = require("colorthief");
 
   const [vibrantObject, setVibrantObject] = useState({});
   const [dominantColor, setDominantColor] = useState("rgb(0,0,0,1)");
   const [darkColor, setDarkColor] = useState("rgb(9, 14, 17)");
   const [entityName, setEntityName] = useState(newEntityName);
   const [activeYear, setActiveYear] = useState(newActiveYear);
-  const [description, setDescription] = useState("jsond")
+  const [description, setDescription] = useState("");
+  const [entityTitle, setEntityTitle] = useState("");
+  const [entitySubtitle, setEntitySubtitle] = useState("");
+
+  function getJsonFileForEntityAndYear() {
+    fetch(
+      "/resources/backgrounds/"
+        .concat(newActiveYear)
+        .concat("/descriptions.json")
+    )
+      .then((r) => {
+        console.log("fetching...");
+        return r.json();
+      })
+      .then((data) => {
+        console.log(data);
+        console.log("setting description: ", data[entityName].description);
+        console.log("setting title: ", data[entityName].title);
+        console.log("setting subtitle: ", data[entityName].subtitle);
+        setDescription(data[entityName].description);
+        setEntityTitle(data[entityName].title);
+        setEntitySubtitle(data[entityName].subtitle);
+      });
+  }
 
   let doStuffWithPalette = (imgSrc) => {
     Vibrant.from(imgSrc).getPalette((err, palette) => {
-      console.log("new vibrant pallete: ", palette.Vibrant._rgb)
+      console.log("new vibrant pallete: ", palette.Vibrant._rgb);
       setVibrantObject(palette.Vibrant._rgb);
+      getJsonFileForEntityAndYear();
     });
   };
   useEffect(() => {
     console.log("my props: ");
-    doStuffWithPalette("./../../resources/backgrounds/"+ newActiveYear + "/" + newEntityName +".jpg");
+    doStuffWithPalette(
+      "./../../resources/backgrounds/" +
+        newActiveYear +
+        "/" +
+        newEntityName +
+        ".jpg"
+    );
   }, [newActiveYear]);
 
   function darkerFilter(value) {
@@ -52,23 +82,28 @@ const ImageRightComponent = ({
           backgroundImage: "rgb(14, 58, 33)",
           background:
             "linear-gradient(-90deg," +
-            dominantColor + "0%," +
-            dominantColor + "50%," + 
+            dominantColor +
+            "0%," +
+            dominantColor +
+            "50%," +
             "rgba(0,212,255,0) 100%)",
         }}
       >
-        <div className="description-title-container">
-          <div className="title-container">
-            <div className="description-title">Component Title</div>
-            <div className="description-icon">
-              <IconComponent entityName={entityName} />
+        <div className="description-title-container-right">
+          <div className="right-title-container">
+            <div className="title-subtitle-description-container">              
+                <div className="description-title">{entityTitle}</div>
+                <div className="subtitle-container-right">
+                  <div className="subtitle-right">Subtitle</div>
+                </div>
+                <div className="description">{description}</div>
             </div>
-          </div>
-          <div className="subtitle-container">
-            <div className="subtitle">Subtitle</div>
-          </div>
-          <div className="description">
-            {description}
+            
+            <div>
+              <div className="description-icon">
+                <IconComponent entityName={entityName} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -94,11 +129,10 @@ const ImageRightComponent = ({
               entityName +
               ".jpg)",
           }}
-        >
-        </div>
+        ></div>
       </div>
     </div>
   );
-}
+};
 
 export default ImageRightComponent;
