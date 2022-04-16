@@ -41,11 +41,11 @@
     font-size: 0.8em;
     text-align: right;
 }
-.description{
+.description-right{
     padding: 2em 0;
     font-size: 0.9em;    
     text-align: justify;
-    padding-right: 12em;
+    padding-left: 12em;
 }
 
 

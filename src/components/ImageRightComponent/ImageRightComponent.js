@@ -96,7 +96,7 @@ const ImageRightComponent = ({
                 <div className="subtitle-container-right">
                   <div className="subtitle-right">Subtitle</div>
                 </div>
-                <div className="description">{description}</div>
+                
             </div>
             
             <div>
@@ -105,6 +105,7 @@ const ImageRightComponent = ({
               </div>
             </div>
           </div>
+          <div className="description-right">{description}</div>
         </div>
       </div>
       <div
