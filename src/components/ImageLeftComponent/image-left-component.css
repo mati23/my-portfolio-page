@@ -29,6 +29,7 @@
     height: 4em;
     display: flex;
     flex-direction: row;
+    white-space: nowrap;
 }
 .description-title{
     font-size: 2em;

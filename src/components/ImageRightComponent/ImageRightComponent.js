@@ -94,7 +94,7 @@ const ImageRightComponent = ({
             <div className="title-subtitle-description-container">              
                 <div className="description-title">{entityTitle}</div>
                 <div className="subtitle-container-right">
-                  <div className="subtitle-right">Subtitle</div>
+                  <div className="subtitle-right">{entitySubtitle}</div>
                 </div>
                 
             </div>

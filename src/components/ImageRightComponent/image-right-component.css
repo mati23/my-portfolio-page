@@ -33,6 +33,7 @@
 .description-title{
     font-size: 2em;
     color: antiquewhite;
+    white-space: nowrap;
 }
 .description-icon{
     color: antiquewhite;
