@@ -1,6 +1,5 @@
-import react from "react";
+import React, {useState} from "react";
 import "./icon-component.css";
-import { useState } from "react/cjs/react.development";
 function IconComponent(props) {
   const [entityName, setEntityName] = useState(props.entityName)
   return (

@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import IconComponent from "../../IconComponent/IconComponent";
 import "./image-right-component.css";
 import * as Vibrant from "node-vibrant";
@@ -25,14 +25,11 @@ const ImageRightComponent = ({
         .concat("/descriptions.json")
     )
       .then((r) => {
-        console.log("fetching...");
+        
         return r.json();
       })
       .then((data) => {
-        console.log(data);
-        console.log("setting description: ", data[entityName].description);
-        console.log("setting title: ", data[entityName].title);
-        console.log("setting subtitle: ", data[entityName].subtitle);
+        
         setDescription(data[entityName].description);
         setEntityTitle(data[entityName].title);
         setEntitySubtitle(data[entityName].subtitle);
@@ -41,13 +38,12 @@ const ImageRightComponent = ({
 
   let doStuffWithPalette = (imgSrc) => {
     Vibrant.from(imgSrc).getPalette((err, palette) => {
-      console.log("new vibrant pallete: ", palette.Vibrant._rgb);
+      
       setVibrantObject(palette.Vibrant._rgb);
       getJsonFileForEntityAndYear();
     });
   };
-  useEffect(() => {
-    console.log("my props: ");
+  useEffect(() => {    
     doStuffWithPalette(
       "./../../resources/backgrounds/" +
         newActiveYear +

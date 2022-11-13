@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import IconComponent from "../../IconComponent/IconComponent";
 import "./image-left-component.css";
 import * as Vibrant from "node-vibrant";
@@ -23,13 +23,10 @@ const ImageLeftComponent = ({
   
   function getJsonFileForEntityAndYear(){
     fetch("/resources/backgrounds/".concat(newActiveYear).concat("/descriptions.json")).then((r)=> {
-    console.log("fetching...");
+    
     return r.json();
   }).then(data=>{
-    console.log(data)
-    console.log("setting description: ",data[entityName].description )
-    console.log("setting title: ",data[entityName].title )
-    console.log("setting subtitle: ",data[entityName].subtitle )
+    
     setDescription(data[entityName].description)
     setEntityTitle(data[entityName].title)
     setEntitySubtitle(data[entityName].subtitle)
@@ -42,13 +39,13 @@ const ImageLeftComponent = ({
     });
   };
   useEffect(() => {
-    console.log("my props: ");
+    
     doStuffWithPalette("./../../resources/backgrounds/"+ newActiveYear + "/" + newEntityName +".jpg");
     getJsonFileForEntityAndYear();
   }, [newActiveYear]);
 
   useEffect(() => {
-    console.log("active year changing in image component", activeYear);
+    
   }, [activeYear]);
 
   function darkerFilter(value) {

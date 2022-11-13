@@ -1,5 +1,5 @@
-import react, { useState } from "react";
-import { useEffect } from "react/cjs/react.development";
+import React, { useState } from "react";
+import { useEffect } from "react"
 import ImageLeftComponent from "../ImageLeftComponent/ImageLeftComponent.js";
 import ImageRightComponent from "../ImageRightComponent/ImageRightComponent.js";
 import "./my-top-component.css";
@@ -11,7 +11,7 @@ const MyTopComponent = () => {
   }
 
   useEffect(()=>{
-    console.log("active year:", activeYear);
+    
   },[activeYear, setActiveYear])
   
   return (
