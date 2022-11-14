@@ -12,20 +12,25 @@ import {
 import Root from './routes/root';
 import HomeComponent from './components/HomeComponent/HomeComponent';
 import BookReviewsComponent from './components/BookReviewsComponent/BookReviewsComponent';
+import BookReviewComponent from './components/BookReviewComponent/BookReviewComponent';
 
 const router = createBrowserRouter([
 
   {
-    path: "/home",
-    element: <HomeComponent/>,
+    path: "/",
+    element: <HomeComponent/>,    
   },
   {
-    path: "/myfavourites",
+    path: "myfavourites",
     element: <MyTopComponent/>,
   },
   {
-    path: "/bookreviews",
-    element: <BookReviewsComponent/>,
+    path: "bookreviews",
+    element: <BookReviewsComponent/>,    
+  },  
+  {
+    path: "/bookreviews/:bookId",
+    element: <BookReviewComponent/>,
   }
 ]);
 

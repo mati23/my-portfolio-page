@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './book-reviews-component.css'
 import '../../resources/fonts/Bebas_Neue/BebasNeue-Regular.ttf'
+import { Link } from "react-router-dom";
 
 
 function BookReviewsComponent() {
@@ -12,9 +13,10 @@ function BookReviewsComponent() {
                     <img className="book-picture" src="https://m.media-amazon.com/images/I/913Fkar1-VL.jpg" ></img>
                 </div>
                 <div className="book-title-container">
-                    <div className="book-title white-text">
+                    <a className="book-title white-text" href="bookreviews/1">
                         O Livro da Economia
-                    </div>
+                    </a>                   
+                    
                     <div className="author-name white-text">
                         Vários Autores
                     </div>
