@@ -20,7 +20,7 @@ function BookReviewComponent() {
     <div className="book-review-container white-text">
       <div className="book-review-centerized-container">
         <div className="book-review-title">O Livro da Economia</div>
-        <div>
+        <div className="book-landscape-picture">
           <img
             className="book-picture"
             src="/resources/books/o-livro-da-economia/my-book.png"
