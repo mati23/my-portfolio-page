@@ -25,6 +25,10 @@
   color: white;
 }
 
+.router-container{
+  height: calc(100vh - 60pt);
+}
+
 .App-link {
   color: #61dafb;
 }
