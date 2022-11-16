@@ -1,0 +1,67 @@
+@font-face {
+    font-family: "BebasRegular";
+    src: url('../../resources/fonts/Bebas_Neue/BebasNeue-Regular.ttf') format("truetype");
+  }
+  
+@font-face {
+    font-family: "YanoneSemiBold";
+    src: url('../../resources/fonts/Yanone_Kaffeesatz/static/YanoneKaffeesatz-SemiBold.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: "YanoneRegular";
+    src: url('../../resources/fonts/Yanone_Kaffeesatz/static/YanoneKaffeesatz-Regular.ttf') format("truetype");
+}
+
+.book-review-thumbnail-container{
+
+}
+
+.book-container-thumbnail{
+    background-color: #2b4352;
+    border-radius: 5pt;
+    display: flex;
+    flex-grow: 1;
+    width: calc(100% * (1/4) - 10px - 1px);
+    margin: 10pt 10pt;
+    min-height: 200pt;
+    min-width: 400pt;
+    flex-direction: row;
+}
+
+.book-picture-thumbnail{
+    flex:1;
+    flex-grow: 1;
+    padding: 10pt;
+    align-self: center;
+    justify-self: center;
+}
+
+.book-picture{
+    max-width: 100%;    
+    max-height: 100%;  
+}
+
+.book-title-container{
+    display: flex;
+    flex-direction: column;
+    flex:2;
+    flex-grow: 2;
+    padding: 20pt 0;
+    
+}
+.book-title{
+    font-family: "BebasRegular";
+    font-size: 30pt;
+    text-align: left;
+}
+.author-name{
+    font-family: "YanoneSemiBold";
+    text-align: left;
+    font-size: 20pt;
+}
+.publisher-name{
+    font-family: "YanoneRegular";
+    text-align: left;
+    font-size: 18pt;
+}
