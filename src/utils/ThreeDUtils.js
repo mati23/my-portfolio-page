@@ -29,13 +29,13 @@ export class ThreeDUtils{
 
     static generateSphere(){
         const geometry = new THREE.CapsuleGeometry( 1, 1, 4, 8 );
-        const material = new THREE.MeshStandardMaterial( {color: 0x00ff00} );
+        const material = new THREE.MeshPhongMaterial( {color: 0x00ff00} );
         const capsule = new THREE.Mesh( geometry, material );
 
         geometry.scale(0.1,0.1,0.1);
         geometry.translate(1,1,1);
-        material.emissive=0xff0000;
-        material.emissiveIntensity=1;
+        material.emissive=new THREE.Color(0xffffff);
+        material.emissiveIntensity=100000
         
         return capsule;
     }
@@ -52,7 +52,7 @@ export class ThreeDUtils{
             let locationZ = getValidLocation(locationsZ);
             
             const geometry = new THREE.BoxGeometry(1, 1, 8);            
-            const material = new THREE.MeshPhongMaterial({ color: 0xffffff });
+            const material = new THREE.MeshStandardMaterial({ color: 0x000000 });
 
             geometry.translate(locationX, locationY, -5);
             let cube = new THREE.Mesh(geometry, material);            
