@@ -65,3 +65,12 @@ p{
 .book-landscape-picture img{
     border-radius: 10pt;
 }
+
+.description-review-section li{
+    font-family: "Merriweather";
+    font-size: 17px;
+    margin-left: 10px;
+    margin-top: 10px;
+    list-style-type: disc;
+    text-align: left;
+}

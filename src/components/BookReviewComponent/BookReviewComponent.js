@@ -26,11 +26,12 @@ function BookReviewComponent() {
       .then((data) => {
         let descriptionString = data["description"]
         setReviewDescription(descriptionString);
+        setBookName(data["bookName"])
       });
   }
 
   useEffect(()=>{
-    
+    console.log(params)
     getJsonFileForEntityAndYear();
   })
 
@@ -46,8 +47,7 @@ function BookReviewComponent() {
             src={"/resources/books/"+params.bookId+"/my-book.png"}
           ></img>
         </div>
-        <section dangerouslySetInnerHTML={{__html: reviewDescription}}>
-          
+        <section className="description-review-section" dangerouslySetInnerHTML={{__html: reviewDescription}}>
         </section>
       </div>
     </div>
