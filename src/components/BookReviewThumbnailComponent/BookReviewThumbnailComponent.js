@@ -11,7 +11,7 @@ const BookReviewThumbnailComponent = ({
     const [bookPublisher, setBookPublisher] = useState("Book Publisher")
     const [bookAuthors, setBookAuthors] = useState([])    
     const [bookHQImage, setBookHQImage] = useState("")
-
+    const [bookId,setBookId] = useState("o-livro-da-economia")
 
     return (
     <div className="book-review-thumbnail-container">
@@ -21,7 +21,7 @@ const BookReviewThumbnailComponent = ({
                     <img src={ process.env.PUBLIC_URL + "/resources/books/"+ bookFolderName +"/thumbnail.jpg"} className="book-picture" ></img>
                 </div>
                 <div className="book-title-container">
-                    <a className="book-title white-text" href="bookreviews/1">
+                    <a className="book-title white-text" href={"bookreviews/"+bookFolderName}>
                         {bookTitle}
                     </a>                   
                     

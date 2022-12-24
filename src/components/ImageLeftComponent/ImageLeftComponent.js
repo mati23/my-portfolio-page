@@ -3,7 +3,6 @@ import IconComponent from "../../IconComponent/IconComponent";
 import "./image-left-component.css";
 import * as Vibrant from "node-vibrant";
 
-
 const ImageLeftComponent = ({
   activeYear: newActiveYear = "2019",
   entityName: newEntityName,
@@ -15,22 +14,24 @@ const ImageLeftComponent = ({
   const [darkColor, setDarkColor] = useState("rgb(9, 14, 17)");
   const [entityName, setEntityName] = useState(newEntityName);
   const [activeYear, setActiveYear] = useState(newActiveYear);
-  const [description, setDescription] = useState("")
-  const [entityTitle, setEntityTitle] = useState("")
-  const [entitySubtitle, setEntitySubtitle] = useState("")
-  
+  const [description, setDescription] = useState("");
+  const [entityTitle, setEntityTitle] = useState("");
+  const [entitySubtitle, setEntitySubtitle] = useState("");
 
-  
-  function getJsonFileForEntityAndYear(){
-    fetch("/resources/backgrounds/".concat(newActiveYear).concat("/descriptions.json")).then((r)=> {
-    
-    return r.json();
-  }).then(data=>{
-    
-    setDescription(data[entityName].description)
-    setEntityTitle(data[entityName].title)
-    setEntitySubtitle(data[entityName].subtitle)
-  })
+  function getJsonFileForEntityAndYear() {
+    fetch(
+      "/resources/backgrounds/"
+        .concat(newActiveYear)
+        .concat("/descriptions.json")
+    )
+      .then((r) => {
+        return r.json();
+      })
+      .then((data) => {
+        setDescription(data[entityName].description);
+        setEntityTitle(data[entityName].title);
+        setEntitySubtitle(data[entityName].subtitle);
+      });
   }
 
   let doStuffWithPalette = (imgSrc) => {
@@ -39,14 +40,17 @@ const ImageLeftComponent = ({
     });
   };
   useEffect(() => {
-    
-    doStuffWithPalette("./../../resources/backgrounds/"+ newActiveYear + "/" + newEntityName +".jpg");
+    doStuffWithPalette(
+      "./../../resources/backgrounds/" +
+        newActiveYear +
+        "/" +
+        newEntityName +
+        ".jpg"
+    );
     getJsonFileForEntityAndYear();
   }, [newActiveYear]);
 
-  useEffect(() => {
-    
-  }, [activeYear]);
+  useEffect(() => {}, [activeYear]);
 
   function darkerFilter(value) {
     return Math.floor(value / 1.5);
@@ -62,11 +66,11 @@ const ImageLeftComponent = ({
       ",1)"
     );
   }
-  
+
   useEffect(() => {
     setDominantColor(rgb(vibrantObject[0], vibrantObject[1], vibrantObject[2]));
   }, [vibrantObject, setVibrantObject]);
-  
+
   return (
     <div className="image-left-component">
       <div
@@ -91,9 +95,7 @@ const ImageLeftComponent = ({
               entityName +
               ".jpg)",
           }}
-        >
-         
-        </div>
+        ></div>
       </div>
 
       <div
@@ -102,8 +104,10 @@ const ImageLeftComponent = ({
           backgroundImage: "rgb(14, 58, 33)",
           background:
             "linear-gradient(90deg," +
-            dominantColor + "0%," + 
-            dominantColor + "60%," + 
+            dominantColor +
+            "0%," +
+            dominantColor +
+            "60%," +
             "rgba(0,212,255,0) 100%)",
         }}
       >
@@ -117,9 +121,7 @@ const ImageLeftComponent = ({
           <div className="subtitle-container">
             <div className="subtitle">{entitySubtitle}</div>
           </div>
-          <div className="description">
-           {description}
-          </div>
+          <div className="description">{description}</div>
         </div>
       </div>
     </div>
