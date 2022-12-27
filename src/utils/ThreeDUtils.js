@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { Vector3 } from "three";
 
 const MAX = 5;
 const MIN = -5;
@@ -53,14 +54,14 @@ export class ThreeDUtils {
 
   static generateSphere() {
     const geometry = new THREE.CapsuleGeometry(0.2, 0.05, 4, 8);
-    const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+    const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
     const capsule = new THREE.Mesh(geometry, material);
 
     geometry.scale(0.1, 0.1, 0.1);
     geometry.translate(1, 1, 1);
-    material.emissive = new THREE.Color(0xff0000);
-    material.emissiveIntensity = 100000;
-
+    material.emissive = new THREE.Color(0xff55aa);
+    material.emissiveIntensity = 1.6;
+    
     return capsule;
   }
 
