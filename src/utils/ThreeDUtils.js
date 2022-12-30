@@ -4,13 +4,6 @@ import { Vector3 } from "three";
 const MAX = 5;
 const MIN = -5;
 
-function generateLocationsArray(numberOfCubes) {
-  let locations = [];
-  for (let i = 0; i <= numberOfCubes; i++) {
-    locations.push(i);
-  }
-  return locations;
-}
 
 function getValidLocation(listOfValidLocations) {
   let locationValue = Math.floor(Math.random() * (MAX - MIN) + MIN);
@@ -52,14 +45,14 @@ export class ThreeDUtils {
     return newMesh;
   }
 
-  static generateSphere() {
+  static generateSphere(color) {
     const geometry = new THREE.CapsuleGeometry(0.2, 0.05, 4, 8);
-    const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+    const material = new THREE.MeshStandardMaterial({ color: color });
     const capsule = new THREE.Mesh(geometry, material);
 
-    geometry.scale(0.1, 0.1, 0.1);
+    geometry.scale(0.029, 0.029, 0.029);
     geometry.translate(1, 1, 1);
-    material.emissive = new THREE.Color(0xff55aa);
+    material.emissive = new THREE.Color(color);
     material.emissiveIntensity = 1.6;
     
     return capsule;
@@ -68,19 +61,34 @@ export class ThreeDUtils {
   static generateCubeList(numberOfCubes) {
     let locationsX = [];
     let locationsY = [];
-    let locationsZ = [];
 
     let cubeList = [];
     for (let i = 0; i <= numberOfCubes; i++) {
       let locationX = getValidLocation(locationsX);
-      let locationY = getValidLocation(locationsY);
-      let locationZ = getValidLocation(locationsZ);
+      let locationY = getValidLocation(locationsY);      
 
       const geometry = new THREE.BoxGeometry(1, 1, 8);
       const material = new THREE.MeshStandardMaterial({ color: 0x000000 });
 
       geometry.translate(locationX, locationY, -5);
       let cube = new THREE.Mesh(geometry, material);
+      cubeList.push(cube);
+    }
+    return cubeList;
+  }
+
+  static generateTransparentCubes(numberOfCubes){
+    let cubeList = [];
+    for (let i = 0; i <= numberOfCubes; i++) {
+          
+
+      let geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+      let material = new THREE.MeshPhysicalMaterial({ roughness: 0,
+        transmission: 1,
+        thickness: 1.1});
+      let cube = new THREE.Mesh(geometry, material);
+      cube.position.set(Math.floor(Math.random() * (3 - (-3)) + (-3)),
+      Math.floor(Math.random() * (2 - (-2)) + (-2)),2.5)
       cubeList.push(cube);
     }
     return cubeList;

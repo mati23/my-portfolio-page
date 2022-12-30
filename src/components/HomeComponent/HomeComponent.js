@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import * as THREE from "three";
-import { Fog, Points, Vector3 } from "three";
+import { Fog, Object3D, Points, TorusKnotGeometry, Vector3 } from "three";
 import { randFloat } from "three/src/math/MathUtils";
 import { ThreeDUtils } from "../../utils/ThreeDUtils";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
 import { AfterimagePass } from "three/examples/jsm/postprocessing/AfterimagePass";
-import { GrannyKnot } from "three/examples/jsm/curves/CurveExtras";
+import { DecoratedTorusKnot5c, GrannyKnot, TorusKnot, TrefoilKnot, VivianiCurve } from "three/examples/jsm/curves/CurveExtras";
 import "./home-component.css";
 const HomeComponent = () => {
   const scene = new THREE.Scene();
-  const geometry = new THREE.BoxGeometry(1, 1, 10);
+  
   const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cubeList = ThreeDUtils.generateCubeList(5);
+  const cubeList = ThreeDUtils.generateCubeList(9);
+  const transparentCubeList = ThreeDUtils.generateTransparentCubes(1);
   const renderer = new THREE.WebGLRenderer({ alpha: true });
   const curve = new THREE.CurvePath();
+  const lightBulbs = [];
+  const lightPathCurves = [];
+  const colors = [0xff1900, 0x22ff22, 0x0000ff, 0xf0ff11]
+  const curves = [new GrannyKnot(), new TrefoilKnot(), new TorusKnot(), new VivianiCurve()]
   
   const camera = new THREE.PerspectiveCamera(
     85,
@@ -27,24 +32,30 @@ const HomeComponent = () => {
   const renderScene = new RenderPass(scene, camera);
   const composer = new EffectComposer(renderer);
   composer.addPass(renderScene);
-  const capsule = ThreeDUtils.generateSphere();
+  
   const smokesArray = [];
   let delta = clock.getDelta();
   
-  const grannyKnotCurve = new GrannyKnot();
-  const geometryCurve = new THREE.TubeGeometry(grannyKnotCurve, 100, 1, 3 , true);
-  const curveMaterial = new THREE.MeshStandardMaterial({color:0xffffff, wireframe:true, side:THREE.FrontSide});
-  
-  
-  const tube = new THREE.Mesh(geometryCurve, curveMaterial);
-  tube.position.set(0,0,0);
-  tube.scale.set(0.1,0.1,0.01)
-  scene.add(tube);
+  for (let i = 0; i<=4;i++){
+    const capsule = ThreeDUtils.generateSphere(colors[i]);
+    lightBulbs.push(capsule);
+  }
 
+  for (let i = 0; i<=4;i++ ){
+    const grannyKnotCurve = curves[i]
+    let geometryCurve = new THREE.TubeGeometry(grannyKnotCurve, 100, 1, 3 , true);
+    let curveMaterial = new THREE.MeshStandardMaterial({color:0xffffff, wireframe:true, side:THREE.FrontSide});    
+    let tube = new THREE.Mesh(geometryCurve, curveMaterial);
+    tube.position.set(i,i,0);
+    tube.rotation.set(0,0,i*2.45);
+    tube.scale.set(0.1*i,0.1,0.0);
+    lightPathCurves.push(tube); 
+
+  }
 
   const bloomPass = new UnrealBloomPass(
     new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.6,
+    0.6,
     0.8,
     0.6
   );
@@ -56,16 +67,34 @@ const HomeComponent = () => {
   composer.addPass(afterImagePass);
 
 
-  for (let p = 0; p < 10; p++) {
+  for (let p = 0; p < 20; p++) {
     let particle = new ThreeDUtils.generateSmokeCube();
     particle.position.set(
-      Math.random() * 300 - 250,
-      Math.random() * 300 - 250,
-      Math.random() * 2 - 8
+      Math.random() * 10 - 80,
+      Math.random() * 10 - 90,
+      Math.random() * 4 - 8
     );
     particle.rotation.z = Math.random() * 360;
-    //scene.add(particle);
+    scene.add(particle);
     smokesArray.push(particle);
+  }
+
+
+  function animateTransparentCubes(){
+    delta = clock.getDelta();
+    
+    requestAnimationFrame(animateTransparentCubes);
+    
+    for (let i = 0; i<transparentCubeList.length; i++){      
+      if (i % 2 == 0){
+        transparentCubeList[i].rotation.z += delta * 0.1;
+        transparentCubeList[i].rotation.x += delta * 0.1;      
+      }else{
+        transparentCubeList[i].rotation.z += delta * -0.1;
+        transparentCubeList[i].rotation.x += delta * -0.1;      
+      }
+    
+    }
   }
 
   function animateSmoke() {
@@ -84,25 +113,22 @@ const HomeComponent = () => {
 
   function animateCapsule() {
     const time = clock.getElapsedTime();
-    const looptime = 30;
+    const looptime = 20;
     const t = (time % looptime) / looptime;
+    for (let i = 0; i<=4; i++){
+      const pos1 = lightPathCurves[i].geometry.parameters.path.getPoint(t);        
+      lightBulbs[i].position.add(pos1).multiply(new THREE.Vector3(0.05,0.05,0)).sub(new THREE.Vector3(1.5,0.1,-0.2));      
+    }
     
-    const pos1 = tube.geometry.parameters.path.getPointAt(t);
-    
-    
-    capsule.position.copy(pos1).multiplyScalar(0.05);
     requestAnimationFrame(animateCapsule);    
     composer.render(scene, camera);
   }
   useEffect(() => {
-    const light = new THREE.AmbientLight(0xffffff, 0.5); // soft white light
-    light.intensity = 1;
+    const light = new THREE.SpotLight(0xffffff, 5); // soft white light
 
-    const pointLight = new THREE.PointLight(0xffff0ff, 2);
-    pointLight.position.x = 2;
-    scene.add(pointLight);
+    light.position.set(new THREE.Vector3(0,0,1))
 
-    geometry.translate(-2, 0, -10);
+    
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     document
@@ -112,13 +138,20 @@ const HomeComponent = () => {
     cubeList.forEach((cube) => {
       scene.add(cube);
     });
+    transparentCubeList.forEach((cube) => {
+      scene.add(cube);
+    });
     scene.add(light);
-    scene.add(capsule);
-    scene.fog = new THREE.Fog(0x555555, 0, 12);
+    scene.add(lightBulbs[0]);
+    scene.add(lightBulbs[1]);
+    scene.add(lightBulbs[2]);
+    scene.add(lightBulbs[3]);
+    
+    scene.fog = new THREE.Fog(0x00155C, 1, 7);
 
     camera.position.z = 5;
 
-    
+    animateTransparentCubes();
     animateSmoke();
     animateCapsule();
   });
