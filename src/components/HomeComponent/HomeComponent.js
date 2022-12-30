@@ -7,14 +7,15 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass";
 import { AfterimagePass } from "three/examples/jsm/postprocessing/AfterimagePass";
-import { DecoratedTorusKnot5c, GrannyKnot, TorusKnot, TrefoilKnot, VivianiCurve } from "three/examples/jsm/curves/CurveExtras";
+import { GrannyKnot, TorusKnot, TrefoilKnot, VivianiCurve } from "three/examples/jsm/curves/CurveExtras";
 import "./home-component.css";
+import { render } from "@testing-library/react";
 const HomeComponent = () => {
   const scene = new THREE.Scene();
   
   const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cubeList = ThreeDUtils.generateCubeList(9);
-  const transparentCubeList = ThreeDUtils.generateTransparentCubes(1);
+  const cubeList = ThreeDUtils.generateCubeList(10);
+  const transparentCubeList = ThreeDUtils.generateTransparentCubes(2);
   const renderer = new THREE.WebGLRenderer({ alpha: true });
   const curve = new THREE.CurvePath();
   const lightBulbs = [];
@@ -23,13 +24,15 @@ const HomeComponent = () => {
   const curves = [new GrannyKnot(), new TrefoilKnot(), new TorusKnot(), new VivianiCurve()]
   
   const camera = new THREE.PerspectiveCamera(
-    85,
+    80,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
   );
   const clock = new THREE.Clock();
   const renderScene = new RenderPass(scene, camera);
+  
+  scene.background = new THREE.Color(0x111130);
   const composer = new EffectComposer(renderer);
   composer.addPass(renderScene);
   
@@ -55,7 +58,7 @@ const HomeComponent = () => {
 
   const bloomPass = new UnrealBloomPass(
     new THREE.Vector2(window.innerWidth, window.innerHeight),
-    0.6,
+    2.6,
     0.8,
     0.6
   );
@@ -67,12 +70,12 @@ const HomeComponent = () => {
   composer.addPass(afterImagePass);
 
 
-  for (let p = 0; p < 20; p++) {
+  for (let p = 0; p < 40; p++) {
     let particle = new ThreeDUtils.generateSmokeCube();
     particle.position.set(
-      Math.random() * 10 - 80,
-      Math.random() * 10 - 90,
-      Math.random() * 4 - 8
+      Math.random() * 500 - 250,
+      Math.random() * 500 - 250,
+      Math.random() * 8 - 120
     );
     particle.rotation.z = Math.random() * 360;
     scene.add(particle);
@@ -107,7 +110,7 @@ const HomeComponent = () => {
   function evolveSmoke() {
     var sp = smokesArray.length;
     while (sp--) {
-      smokesArray[sp].rotation.z += delta * 0.05;
+      smokesArray[sp].rotation.z += delta * 0.5;
     }
   }
 
@@ -124,9 +127,9 @@ const HomeComponent = () => {
     composer.render(scene, camera);
   }
   useEffect(() => {
-    const light = new THREE.SpotLight(0xffffff, 5); // soft white light
-
-    light.position.set(new THREE.Vector3(0,0,1))
+    const light = new THREE.AmbientLight(0xffffff); // soft white light
+    light.intensity=10
+    
 
     
 
@@ -147,9 +150,9 @@ const HomeComponent = () => {
     scene.add(lightBulbs[2]);
     scene.add(lightBulbs[3]);
     
-    scene.fog = new THREE.Fog(0x00155C, 1, 7);
+    scene.fog = new THREE.Fog(0x11155C, 2, 7);
 
-    camera.position.z = 5;
+    camera.position.z = 6;
 
     animateTransparentCubes();
     animateSmoke();
@@ -157,7 +160,7 @@ const HomeComponent = () => {
   });
   return (
     <div className="home-component-container" id="home-component-container">
-      <div>Home Component</div>
+      
     </div>
   );
 };

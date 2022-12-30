@@ -1,46 +1,35 @@
 import * as THREE from "three";
 import { Vector3 } from "three";
 
-const MAX = 5;
-const MIN = -5;
+const MAX = 4;
+const MIN = -4;
 
 
 function getValidLocation(listOfValidLocations) {
-  let locationValue = Math.floor(Math.random() * (MAX - MIN) + MIN);
-  let notRepeated = false;
-  while (notRepeated == false) {
-    if (!listOfValidLocations.includes(locationValue)) {
-      listOfValidLocations.push(locationValue);
-      notRepeated = true;
-    } else {
-      locationValue = Math.floor(Math.random() * (MAX - MIN) + MIN);
+  let validPositions = []
+  for (let i = MIN; i<MAX; i++){
+    for (let j = MIN; j<MAX; j++){
+      let location = [i,j];
+      validPositions.push(location);
     }
-  }
-  return locationValue;
+  }  
+  return validPositions;
 }
 
 export class ThreeDUtils {
-  static generateSmokeCube() {
-    const geometry = new THREE.BoxGeometry(200, 200, 200);
-    const material = new THREE.MeshLambertMaterial({
-      color: new THREE.Color("rgb(83, 84, 255)"),
-      wireframe: false,
-    });
-    const mesh = new THREE.Mesh(geometry, material);
-    const textGeo = new THREE.PlaneGeometry(300, 300);
-    
+  static generateSmokeCube() {    
     const textureLoader = new THREE.TextureLoader();
-
     const smokeTexture = textureLoader.load(
       "https://s3-us-west-2.amazonaws.com/s.cdpn.io/95637/Smoke-Element.png"
     );
 
     const smokeMaterial = new THREE.MeshLambertMaterial({
-        color: new THREE.Color("rgb(83, 84, 255)"),
+        color: new THREE.Color("rgba(83, 84, 255,0.5)"),
         map: smokeTexture,
-        transparent: true
+        transparent: true,
+        opacity:0.5
       });
-    const smokeGeo = new THREE.PlaneGeometry(300, 300);
+    const smokeGeo = new THREE.PlaneGeometry(200, 200);
     const newMesh = new THREE.Mesh(smokeGeo, smokeMaterial);
     return newMesh;
   }
@@ -59,17 +48,21 @@ export class ThreeDUtils {
   }
 
   static generateCubeList(numberOfCubes) {
-    let locationsX = [];
-    let locationsY = [];
-
     let cubeList = [];
-    for (let i = 0; i <= numberOfCubes; i++) {
-      let locationX = getValidLocation(locationsX);
-      let locationY = getValidLocation(locationsY);      
+    let validPositions = getValidLocation();
+    for (let i = 0; i <= numberOfCubes; i++) {      
+      
+      const randomIndex = Math.floor(Math.random() * validPositions.length);
+      const currentPosition = validPositions[randomIndex];      
 
-      const geometry = new THREE.BoxGeometry(1, 1, 8);
-      const material = new THREE.MeshStandardMaterial({ color: 0x000000 });
+      let locationX = currentPosition[0];
+      let locationY = currentPosition[1];
 
+      validPositions.slice(randomIndex,1);
+
+      const geometry = new THREE.BoxGeometry(0.8, 0.8, 8);
+      const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+      
       geometry.translate(locationX, locationY, -5);
       let cube = new THREE.Mesh(geometry, material);
       cubeList.push(cube);
@@ -79,16 +72,21 @@ export class ThreeDUtils {
 
   static generateTransparentCubes(numberOfCubes){
     let cubeList = [];
-    for (let i = 0; i <= numberOfCubes; i++) {
+    let mod = -1;
+    for (let i = 1; i <= numberOfCubes; i++) {
           
 
       let geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-      let material = new THREE.MeshPhysicalMaterial({ roughness: 0,
+      let material = new THREE.MeshPhysicalMaterial({ roughness: 0.1,
         transmission: 1,
-        thickness: 1.1});
+        thickness: 1.2});
       let cube = new THREE.Mesh(geometry, material);
-      cube.position.set(Math.floor(Math.random() * (3 - (-3)) + (-3)),
-      Math.floor(Math.random() * (2 - (-2)) + (-2)),2.5)
+      if (i % 2 == 0){
+        cube.position.set(-0.5,-0.5,2);
+      }else {
+        cube.position.set(1,1,2)
+      }
+      
       cubeList.push(cube);
     }
     return cubeList;
