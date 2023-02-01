@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as THREE from "three";
-import { Fog, Object3D, Points, TorusKnotGeometry, Vector3 } from "three";
-import { randFloat } from "three/src/math/MathUtils";
+
+
 import { ThreeDUtils } from "../../utils/ThreeDUtils";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer";
@@ -9,12 +9,11 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 import { AfterimagePass } from "three/examples/jsm/postprocessing/AfterimagePass";
 import { GrannyKnot, TorusKnot, TrefoilKnot, VivianiCurve } from "three/examples/jsm/curves/CurveExtras";
 import "./home-component.css";
-import { render } from "@testing-library/react";
 const HomeComponent = () => {
   const scene = new THREE.Scene();
   
   const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cubeList = ThreeDUtils.generateCubeList(10);
+  const cubeList = ThreeDUtils.generateCubeList(20);
   const transparentCubeList = ThreeDUtils.generateTransparentCubes(2);
   const renderer = new THREE.WebGLRenderer({ alpha: true });
   const curve = new THREE.CurvePath();
@@ -32,7 +31,7 @@ const HomeComponent = () => {
   const clock = new THREE.Clock();
   const renderScene = new RenderPass(scene, camera);
   
-  scene.background = new THREE.Color(0x111130);
+  scene.background = new THREE.Color(0x000000);
   const composer = new EffectComposer(renderer);
   composer.addPass(renderScene);
   
@@ -75,13 +74,28 @@ const HomeComponent = () => {
     particle.position.set(
       Math.random() * 500 - 250,
       Math.random() * 500 - 250,
-      Math.random() * 8 - 120
+      Math.random() * 3 - 4 
     );
     particle.rotation.z = Math.random() * 360;
     scene.add(particle);
     smokesArray.push(particle);
   }
 
+  function animateSmoke() {
+    // note: three.js includes requestAnimationFrame shim
+    
+    requestAnimationFrame(animateSmoke);
+    evolveSmoke();
+    
+  }
+
+  function evolveSmoke(delta) {
+    delta = clock.getDelta();
+    var sp = smokesArray.length;
+    while (sp--) {
+      smokesArray[sp].rotation.z += delta * 20.5;
+    }
+  }
 
   function animateTransparentCubes(){
     delta = clock.getDelta();
@@ -98,22 +112,9 @@ const HomeComponent = () => {
       }
     
     }
-  }
+  } 
 
-  function animateSmoke() {
-    // note: three.js includes requestAnimationFrame shim
-    delta = clock.getDelta();
-    requestAnimationFrame(animateSmoke);
-    evolveSmoke();
-  }
-
-  function evolveSmoke() {
-    var sp = smokesArray.length;
-    while (sp--) {
-      smokesArray[sp].rotation.z += delta * 0.5;
-    }
-  }
-
+  
   function animateCapsule() {
     const time = clock.getElapsedTime();
     const looptime = 20;
@@ -127,11 +128,12 @@ const HomeComponent = () => {
     composer.render(scene, camera);
   }
   useEffect(() => {
-    const light = new THREE.AmbientLight(0xffffff); // soft white light
-    light.intensity=10
-    
-
-    
+    const plane = ThreeDUtils.generatePlane();
+    scene.add(plane);
+    const light = new THREE.SpotLight(0x11155C); // soft white light
+    light.position.set(0,0,2.5);
+    light.penumbra = 0.5;
+    light.intensity=5;
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     document
@@ -150,7 +152,7 @@ const HomeComponent = () => {
     scene.add(lightBulbs[2]);
     scene.add(lightBulbs[3]);
     
-    scene.fog = new THREE.Fog(0x11155C, 2, 7);
+    scene.fog = new THREE.Fog(0x000000, 1, 12.8);
 
     camera.position.z = 6;
 
@@ -160,9 +162,10 @@ const HomeComponent = () => {
   });
   return (
     <div className="home-component-container" id="home-component-container">
-      
+      <div className="welcome-message-container">Mateus Arruda</div>
     </div>
   );
 };
 
 export default HomeComponent;
+

@@ -26,8 +26,7 @@ export class ThreeDUtils {
     const smokeMaterial = new THREE.MeshLambertMaterial({
         color: new THREE.Color("rgba(83, 84, 255,0.5)"),
         map: smokeTexture,
-        transparent: true,
-        opacity:0.5
+        transparent: true
       });
     const smokeGeo = new THREE.PlaneGeometry(200, 200);
     const newMesh = new THREE.Mesh(smokeGeo, smokeMaterial);
@@ -70,6 +69,14 @@ export class ThreeDUtils {
     return cubeList;
   }
 
+  static generatePlane(){
+    let geometry = new THREE.BoxGeometry(100, 100, 1);
+    let material = new THREE.MeshPhysicalMaterial();
+    let plane = new THREE.Mesh(geometry, material);
+    plane.position.set(0,0,-6);
+    return plane;
+  }
+
   static generateTransparentCubes(numberOfCubes){
     let cubeList = [];
     let mod = -1;
@@ -77,7 +84,7 @@ export class ThreeDUtils {
           
 
       let geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-      let material = new THREE.MeshPhysicalMaterial({ roughness: 0.1,
+      let material = new THREE.MeshPhysicalMaterial({ roughness: 0.15,
         transmission: 1,
         thickness: 1.2});
       let cube = new THREE.Mesh(geometry, material);
