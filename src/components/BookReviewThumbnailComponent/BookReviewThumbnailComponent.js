@@ -7,11 +7,32 @@ const BookReviewThumbnailComponent = ({
     bookFolderName: newBookTitle = "BookTitle",    
   }) => {
     const [bookFolderName, setBookFolderName] = useState(newBookTitle)
-    const [bookTitle, setBookTitlke] = useState("Book Title")
+    const [bookTitle, setBookTitle] = useState("Book Title")
     const [bookPublisher, setBookPublisher] = useState("Book Publisher")
     const [bookAuthors, setBookAuthors] = useState([])    
     const [bookHQImage, setBookHQImage] = useState("")
     const [bookId,setBookId] = useState("o-livro-da-economia")
+    
+    function getJsonFileForEntityAndYear() {
+        fetch(
+          "/resources/books/"
+            .concat(bookFolderName)
+            .concat("/review.json")
+        )
+          .then((r) => {
+            return r.json();
+          })
+          .then((data) => {
+            console.log(data["bookName"]);
+            setBookTitle(data["bookName"]);
+            setBookPublisher(data["bookPublisher"]);
+            setBookAuthors(data["bookAuthors"])
+          });
+      }
+
+    useEffect(()=>{
+        getJsonFileForEntityAndYear()
+    },[]);
 
     return (
     <div className="book-review-thumbnail-container">
@@ -26,7 +47,7 @@ const BookReviewThumbnailComponent = ({
                     </a>                   
                     
                     <div className="author-name white-text">
-                        {bookAuthors.join(",")}
+                        {bookAuthors}
                     </div>
                     <div className="publisher-name white-text">
                         {bookPublisher}
