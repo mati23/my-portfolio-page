@@ -14,7 +14,8 @@
 }
 
 .book-review-thumbnail-container{
-
+    height: 100%;
+    flex-grow: 1;
 }
 
 .book-container-thumbnail{
@@ -26,7 +27,7 @@
     margin: 10pt 10pt;
     min-height: 200pt;
     min-width: 400pt;
-    flex-direction: row;
+    flex-direction: row;    
 }
 
 .book-picture-thumbnail{
@@ -35,6 +36,7 @@
     padding: 10pt;
     align-self: center;
     justify-self: center;
+    height: 180pt;
 }
 
 .book-picture{

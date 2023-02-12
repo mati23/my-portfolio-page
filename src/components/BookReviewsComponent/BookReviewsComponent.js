@@ -11,6 +11,8 @@ function BookReviewsComponent() {
         <div className="book-grid">
         <BookReviewThumbnailComponent bookFolderName="o-livro-da-economia"/>
         <BookReviewThumbnailComponent bookFolderName="make-it-stick"/>
+        <BookReviewThumbnailComponent bookFolderName="o-mundo-assombrado-por-demonios"/>
+        <BookReviewThumbnailComponent bookFolderName="habitos-atomicos"/>
         </div>
     </div>);
 };
