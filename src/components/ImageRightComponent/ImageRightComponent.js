@@ -17,6 +17,7 @@ const ImageRightComponent = ({
   const [description, setDescription] = useState("");
   const [entityTitle, setEntityTitle] = useState("");
   const [entitySubtitle, setEntitySubtitle] = useState("");
+  const [imgSource, setImgSource] = useState("");
 
   function getJsonFileForEntityAndYear() {
     fetch(
@@ -51,6 +52,7 @@ const ImageRightComponent = ({
         newEntityName +
         ".jpg"
     );
+    setImgSource("/resources/backgrounds/".concat(newActiveYear).concat("/").concat(newEntityName).concat(".jpg"));
   }, [newActiveYear]);
 
   function darkerFilter(value) {
@@ -112,21 +114,10 @@ const ImageRightComponent = ({
             "background: linear-gradient(-90deg, rgba(0,212,255,0) 0%, rgba(141, 15, 20,1) 100%)",
         }}
       >
-        <div
+        <img
           className="background-image"
-          style={{
-            backgroundImage:
-              "linear-gradient(to left," +
-              darkColor +
-              ", rgba(141, 15, 20,0.2) ," +
-              dominantColor +
-              "), url(/resources/backgrounds/" +
-              newActiveYear +
-              "/" +
-              entityName +
-              ".jpg)",
-          }}
-        ></div>
+          src={imgSource}
+        />
       </div>
     </div>
   );

@@ -17,6 +17,7 @@ const ImageLeftComponent = ({
   const [description, setDescription] = useState("");
   const [entityTitle, setEntityTitle] = useState("");
   const [entitySubtitle, setEntitySubtitle] = useState("");
+  const [imgSource, setImgSource] = useState("");
 
   function getJsonFileForEntityAndYear() {
     fetch(
@@ -48,6 +49,8 @@ const ImageLeftComponent = ({
         ".jpg"
     );
     getJsonFileForEntityAndYear();
+
+    setImgSource("/resources/backgrounds/".concat(newActiveYear).concat("/").concat(newEntityName).concat(".jpg"));
   }, [newActiveYear]);
 
   useEffect(() => {}, [activeYear]);
@@ -71,6 +74,8 @@ const ImageLeftComponent = ({
     setDominantColor(rgb(vibrantObject[0], vibrantObject[1], vibrantObject[2]));
   }, [vibrantObject, setVibrantObject]);
 
+
+
   return (
     <div className="image-left-component">
       <div
@@ -81,21 +86,10 @@ const ImageLeftComponent = ({
             "background: linear-gradient(-90deg, rgba(141, 15, 20,1) 0%, rgba(0,212,255,0) 100%)",
         }}
       >
-        <div
-          className="background-image"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right," +
-              darkColor +
-              ", rgba(141, 15, 20,0.2) ," +
-              dominantColor +
-              "), url(/resources/backgrounds/" +
-              newActiveYear +
-              "/" +
-              entityName +
-              ".jpg)",
-          }}
-        ></div>
+        <img
+          src={imgSource}
+          className="background-image"          
+        />
       </div>
 
       <div

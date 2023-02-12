@@ -26,12 +26,12 @@
     align-items: self-end;
 }
 .title-container{
-    height: 4em;
+    
     display: flex;
     flex-direction: row;
 }
 .description-title{
-    font-size: 2em;
+    font-size: 1.5vw;
     color: antiquewhite;
     white-space: nowrap;
 }
@@ -39,22 +39,22 @@
     color: antiquewhite;
 }
 .subtitle-right{
-    font-size: 0.8em;
+    font-size: 0.7vw;
     text-align: right;
 }
 .description-right{
     padding: 2em 0;
-    font-size: 0.9em;    
+    font-size: 0.6vw;    
     text-align: justify;
     padding-left: 12em;
 }
 
 
 .background-image{
-    object-fit: fill;
+    
     width: 100%;
     height: 100%;
-    background-repeat: round;    
+    background-repeat: no-repeat;    
 }
 
 .subtitle-container-right{

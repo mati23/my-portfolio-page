@@ -26,33 +26,30 @@
     padding: 2em 3em;
 }
 .title-container{
-    height: 4em;
     display: flex;
     flex-direction: row;
-    white-space: nowrap;
 }
 .description-title{
-    font-size: 2em;
+    font-size: 1.5vw;
     color: antiquewhite;
 }
 .description-icon{
     color: antiquewhite;
 }
 .subtitle{
-    font-size: 0.8em;
+    font-size: 0.7vw;
     text-align: left;
 }
 .description{
     padding: 2em 0;
-    font-size: 0.9em;    
+    font-size: 0.6vw;    
     text-align: justify;
     padding-right: 12em;
 }
 
 
-.background-image{
-    object-fit: fill;
-    width: 100%;
-    height: 100%;
-    background-repeat: round;    
+.image-left-component .background-image{
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
 }

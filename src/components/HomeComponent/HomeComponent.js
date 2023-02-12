@@ -9,6 +9,7 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 import { AfterimagePass } from "three/examples/jsm/postprocessing/AfterimagePass";
 import { GrannyKnot, TorusKnot, TrefoilKnot, VivianiCurve } from "three/examples/jsm/curves/CurveExtras";
 import "./home-component.css";
+import MenuButtonComponent from "../MenuButtonComponent/MenuButtonComponent";
 const HomeComponent = () => {
   const scene = new THREE.Scene();
   
@@ -162,7 +163,13 @@ const HomeComponent = () => {
   });
   return (
     <div className="home-component-container" id="home-component-container">
-      <div className="welcome-message-container">Mateus Arruda</div>
+      <div className="menu-container">
+        <MenuButtonComponent index={1} text={'Favoritos'}/>
+        <MenuButtonComponent index={2} text={'Resenhas'}/>
+        <MenuButtonComponent index={3} text={'Contato'}/>
+        </div>
+      <div className="welcome-message-container">      
+        Mateus Arruda</div>
     </div>
   );
 };
