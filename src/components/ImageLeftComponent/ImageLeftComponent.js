@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import IconComponent from "../../IconComponent/IconComponent";
 import "./image-left-component.css";
 import * as Vibrant from "node-vibrant";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 const ImageLeftComponent = ({
   activeYear: newActiveYear = "2019",
@@ -53,7 +54,20 @@ const ImageLeftComponent = ({
     setImgSource("/resources/backgrounds/".concat(newActiveYear).concat("/").concat(newEntityName).concat(".jpg"));
   }, [newActiveYear]);
 
-  useEffect(() => {}, [activeYear]);
+  useEffect(() => {    
+    setActiveYear(newActiveYear);    
+  }, [newActiveYear]);
+
+  useEffect(()=>{
+    const componentLeft = document.getElementById(entityName);
+    componentLeft.classList.remove("fade-in-animation");    
+    setTimeout((()=>{
+      componentLeft.classList.add("fade-in-animation");
+      console.log("Adding class");
+    }), 10)
+    console.log("Changing active year to ", newActiveYear);
+    
+  },[activeYear]);
 
   function darkerFilter(value) {
     return Math.floor(value / 1.5);
@@ -72,53 +86,58 @@ const ImageLeftComponent = ({
 
   useEffect(() => {
     setDominantColor(rgb(vibrantObject[0], vibrantObject[1], vibrantObject[2]));
+    
   }, [vibrantObject, setVibrantObject]);
 
+  
 
 
   return (
-    <div className="image-left-component">
-      <div
-        className="image-container"
-        style={{
-          background: darkColor,
-          background:
-            "background: linear-gradient(-90deg, rgba(141, 15, 20,1) 0%, rgba(0,212,255,0) 100%)",
-        }}
-      >
-        <img
-          src={imgSource}
-          className="background-image"          
-        />
-      </div>
+    
+      <div id={entityName} className={"image-left-component fade-in-animation"}>
+        <div
+          className="image-container"
+          style={{
+            background: darkColor,
+            background:
+              "background: linear-gradient(-90deg, rgba(141, 15, 20,1) 0%, rgba(0,212,255,0) 100%)",
+          }}
+        >
+          <img
+            src={imgSource}
+            className="background-image"          
+          />
+        </div>
 
-      <div
-        className="description-component"
-        style={{
-          backgroundImage: "rgb(14, 58, 33)",
-          background:
-            "linear-gradient(90deg," +
-            dominantColor +
-            "0%," +
-            dominantColor +
-            "60%," +
-            "rgba(0,212,255,0) 100%)",
-        }}
-      >
-        <div className="description-title-container-left">
-          <div className="title-container">
-            <div className="description-title">{entityTitle}</div>
-            <div className="description-icon">
-              <IconComponent entityName={entityName} />
+        <div
+          className="description-component"
+          style={{
+            backgroundImage: "rgb(14, 58, 33)",
+            background:
+              "linear-gradient(90deg," +
+              dominantColor +
+              "0%," +
+              dominantColor +
+              "60%," +
+              "rgba(0,212,255,0) 100%)",
+          }}
+        >
+          <div className="description-title-container-left">
+            <div className="title-container">
+              <div className="description-title">{entityTitle}</div>
+              <div className="description-icon">
+                <IconComponent entityName={entityName} />
+              </div>
             </div>
+            <div className="subtitle-container">
+              <div className="subtitle">{entitySubtitle}</div>
+            </div>
+            <div className="description">{description}</div>
           </div>
-          <div className="subtitle-container">
-            <div className="subtitle">{entitySubtitle}</div>
-          </div>
-          <div className="description">{description}</div>
         </div>
       </div>
-    </div>
+    
+    
   );
 };
 

@@ -16,6 +16,7 @@
 .book-review-thumbnail-container{
     height: 100%;
     flex-grow: 1;
+    max-width: 420pt;
 }
 
 .book-container-thumbnail{

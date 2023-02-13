@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react"
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import ImageLeftComponent from "../ImageLeftComponent/ImageLeftComponent.js";
 import ImageRightComponent from "../ImageRightComponent/ImageRightComponent.js";
 import "./my-top-component.css";
@@ -7,7 +8,9 @@ const MyTopComponent = () => {
   const [activeYear, setActiveYear] = useState("2019");
 
   const changeActiveYear = (year) =>{
-    setActiveYear(year)
+    setActiveYear(year);
+    // const leftComponent = document.getElementsByClassName("image-left-component")[0];
+    // leftComponent.removeClass("fade-in-animation").addClass("fade-in-animation");
   }
 
   useEffect(()=>{
@@ -15,6 +18,7 @@ const MyTopComponent = () => {
   },[activeYear, setActiveYear])
   
   return (
+    
     <div>
       <div className="timeline-container">
         <div className="timeline-button-container">
@@ -39,13 +43,15 @@ const MyTopComponent = () => {
           </div>          
         </div>
       </div>
-      <div className="my-top-component">
-        <ImageLeftComponent  entityName={"game"} activeYear={activeYear} />
-        <ImageRightComponent entityName={"movie"} activeYear={activeYear} />        
-        <ImageLeftComponent entityName={"song"} activeYear={activeYear} />
-        <ImageRightComponent entityName={"album"} activeYear={activeYear} />
-        <ImageLeftComponent entityName={"book"} activeYear={activeYear} />
-      </div>
+      
+        <div className="my-top-component">
+          <ImageLeftComponent  entityName={"game"} activeYear={activeYear} />        
+          <ImageRightComponent entityName={"movie"} activeYear={activeYear} />        
+          <ImageLeftComponent entityName={"song"} activeYear={activeYear} />
+          <ImageRightComponent entityName={"album"} activeYear={activeYear} />
+          <ImageLeftComponent entityName={"book"} activeYear={activeYear} />
+        </div>
+      
     </div>
   );
 }

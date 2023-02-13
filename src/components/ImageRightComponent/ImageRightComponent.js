@@ -72,8 +72,25 @@ const ImageRightComponent = ({
   useEffect(() => {
     setDominantColor(rgb(vibrantObject[0], vibrantObject[1], vibrantObject[2]));
   }, [vibrantObject, setVibrantObject]);
+
+  
+  useEffect(() => {    
+    setActiveYear(newActiveYear);    
+  }, [newActiveYear]);
+  
+  useEffect(()=>{
+    const componentLeft = document.getElementById(entityName);
+    componentLeft.classList.remove("fade-in-animation");    
+    setTimeout((()=>{
+      componentLeft.classList.add("fade-in-animation");
+      console.log("Adding class");
+    }), 1)
+    console.log("Changing active year to ", newActiveYear);
+    
+  },[activeYear]);
+
   return (
-    <div className="image-right-component">
+    <div className="image-right-component fade-in-animation" id={entityName}>
       <div
         className="description-component"
         style={{

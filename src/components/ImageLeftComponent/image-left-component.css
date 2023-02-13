@@ -4,7 +4,15 @@
     flex-direction: row;
     padding: 0em 4em;
     color: antiquewhite;    
-    margin: 5em 0 5em 0;
+    margin: 5em 0 5em 0;    
+    animation: fade-in 5000ms forwards;
+}
+.image-left-component[open]{
+    animation: fade-in 5000ms forwards;
+}
+
+.image-left-component[open]::backdrop{
+    animation: fade-in 5000ms forwards;
 }
 .icon-image-container{
     height: 100%;
@@ -53,3 +61,11 @@
     min-width: 100%;
     min-height: 100%;
 }
+
+.fade-in-animation{
+    animation: fadeIn 2s;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
