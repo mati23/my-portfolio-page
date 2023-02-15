@@ -66,11 +66,20 @@ p{
     border-radius: 10pt;
 }
 
-.description-review-section li{
+.description-review-section li.dot{
     font-family: "Merriweather";
     font-size: 17px;
     margin-left: 10px;
     margin-top: 10px;
     list-style-type: disc;
+    text-align: left;
+}
+
+.description-review-section li.number{
+    font-family: "Merriweather";
+    font-size: 17px;
+    margin-left: 10px;
+    margin-top: 10px;
+    list-style-type: decimal;
     text-align: left;
 }
