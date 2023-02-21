@@ -1,0 +1,74 @@
+.experience-component{
+    max-width: 1200px;
+    width: 100%;
+}
+
+.line{
+    display: block; 
+    border-radius: 2px;
+    background-color: white;
+    overflow: hidden; border-style: inset; border-width: 1px;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    height: 5px;
+    width: 50%;
+    margin: 1em;
+}
+
+.experience-icon{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+.experience-title{
+    font-size: 2em;
+    align-self: center;
+    margin: 1em 0;
+    font-family: 'ZrnicRg';
+}
+
+.experience-description-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.company-name{
+    text-align: left;
+}
+.role{
+    text-align: left;
+}
+
+.experience-description{
+    margin: 1em 2em ;
+    text-align: left;
+    font-size: .9em;
+}
+
+.description-padding{
+    padding-left: 1em;
+}
+
+.dot{
+    list-style-type: disc;
+}
+
+.experience-button-polygon{
+    padding-left: 0.5em;
+    --path: 0% 0, 100% 0, 90% 100%, 0% 100%;
+    font-family: 'ZrnicRg';
+    font-weight: 500;
+    font-size: 1.5rem;
+    clip-path: polygon(var(--path));        
+    width: 400px;
+    height: 40px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    background-size: 300% 100%;
+    background-image: linear-gradient(to right, #131B6D, #213DD4, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}

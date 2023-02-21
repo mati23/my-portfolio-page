@@ -13,6 +13,7 @@ import Root from './routes/root';
 import HomeComponent from './components/HomeComponent/HomeComponent';
 import BookReviewsComponent from './components/BookReviewsComponent/BookReviewsComponent';
 import BookReviewComponent from './components/BookReviewComponent/BookReviewComponent';
+import PortfolioComponent from './components/Portfolio/PortfolioComponent';
 
 const router = createBrowserRouter([
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "myfavourites",
     element: <MyTopComponent/>,
+  },
+  {
+    path: "myportfolio",
+    element: <PortfolioComponent/>,
   },
   {
     path: "bookreviews",

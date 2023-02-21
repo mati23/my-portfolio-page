@@ -164,9 +164,9 @@ const HomeComponent = () => {
   return (
     <div className="home-component-container" id="home-component-container">
       <div className="menu-container">
-        <MenuButtonComponent index={1} text={'Favoritos'}/>
-        <MenuButtonComponent index={2} text={'Resenhas'}/>
-        <MenuButtonComponent index={3} text={'Contato'}/>
+        <MenuButtonComponent index={1} text={'Favorites'} reference="/myfavourites"/>
+        <MenuButtonComponent index={2} text={'Book Reviews'} reference="/bookreviews"/>
+        <MenuButtonComponent index={3} text={'Portfolio'} reference="/myportfolio"/>
         </div>
       <div className="welcome-message-container">      
         Mateus Arruda</div>
