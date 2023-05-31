@@ -1,4 +1,4 @@
-from node:16
+FROM node:alpine
 
 WORKDIR /app
 
@@ -6,8 +6,6 @@ COPY package.json .
 
 RUN npm install --force
 
-COPY . . 
+COPY . .
 
-expose 80
-
-CMD ["npm", "start"]
+cmd ["npm", "run", "dev"]

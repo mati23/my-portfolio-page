@@ -1,0 +1,49 @@
+@font-face {
+	font-family: "BebasRegular";
+	src: url("../../resources/fonts/Bebas_Neue/BebasNeue-Regular.ttf")
+		format("truetype");
+}
+
+@font-face {
+	font-family: "YanoneSemiBold";
+	src: url("../../resources/fonts/Yanone_Kaffeesatz/static/YanoneKaffeesatz-SemiBold.ttf")
+		format("truetype");
+}
+
+@font-face {
+	font-family: "YanoneRegular";
+	src: url("../../resources/fonts/Yanone_Kaffeesatz/static/YanoneKaffeesatz-Regular.ttf")
+		format("truetype");
+}
+
+.container {
+	@apply m-auto h-full w-full sm:max-w-[calc(50%-4px)] lg:max-w-[calc(33%-4px)];
+}
+
+.container > div {
+	@apply flex gap-2 p-2 bg-[#2b4352] rounded-lg;
+}
+
+.bookPicture {
+	@apply p-2 h-[160px] aspect-square overflow-hidden;
+}
+
+.bookPicture img {
+	@apply h-full w-full object-cover;
+}
+
+.bookInfo {
+	@apply flex flex-col  gap-4 w-full text-white text-xl font-[BebasRegular] leading-none md:text-3xl;
+}
+
+.bookInfo:last-child {
+	@apply mt-2;
+}
+
+.bookInfoAuthor, .bookInfoPublisher {
+	@apply font-[YanoneSemiBold] text-lg leading-none;
+}
+
+.bookInfoAuthor span:nth-child(n+2)::before {
+	content: ", "
+}

@@ -1,0 +1,31 @@
+.container {
+	@apply flex flex-col justify-center;
+}
+
+.timelineButtons {
+	@apply relative flex w-[40em] max-w-[95vw] m-auto p-4 h-auto;
+}
+
+.timelineButtons div {
+	@apply relative flex justify-between items-center gap-20 w-full max-w-[95%] m-auto py-2 px-1 overflow-x-scroll;
+}
+
+.timelineButtons:before {
+	content: "";
+	@apply absolute w-auto h-1 left-10 right-10 self-center bg-white/80 blur-[1px] ring-1 ring-blue-500 sm:-translate-y-1;
+}
+
+.inactiveButton, .activeButton {
+	@apply relative py-2 px-4 bg-blue-900 font-semibold leading-none border border-white/30 rounded-full duration-200;
+}
+
+.activeButton {
+	@apply bg-gradient-to-b from-blue-700 via-blue-500 scale-110 font-bold border-white/40;
+}
+
+.timelineInfo {
+	@apply mb-10;
+}
+.timelineInfo > div {
+	@apply flex flex-col items-center gap-10 m-auto;
+}

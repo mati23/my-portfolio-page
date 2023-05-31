@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Meu Portfólio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este é um projeto de portfólio construído usando React. Ele fornece uma maneira simples de exibir minhas experiências técnicas.
 
-## Available Scripts
+## Como executar localmente
 
-In the project directory, you can run:
+Para executar este projeto localmente, siga estas etapas:
 
-### `npm start`
+Certifique-se de ter o Node.js instalado em seu sistema. Você pode baixá-lo em https://nodejs.org.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Clone este repositório para o seu computador:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+git clone https://github.com/mati23/my-portfolio-page.git
+```
+Navegue até o diretório do projeto:
 
-### `npm test`
+```bash
+cd portfolio-react
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Instale as dependências do projeto usando o npm:
 
-### `npm run build`
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Após a conclusão da instalação das dependências, você pode iniciar o servidor de desenvolvimento:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm run dev
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Isso iniciará o servidor de desenvolvimento. Agora você pode visualizar o portfólio localmente em http://localhost:8000.
 
-### `npm run eject`
+## Usando Docker
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Se você preferir executar o projeto usando o Docker, siga estas etapas:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Certifique-se de ter o Docker instalado em seu sistema. Você pode baixá-lo em https://www.docker.com.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Clone este repositório para o seu computador:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+git clone https://github.com/mati23/my-portfolio-page.git
+```
 
-## Learn More
+Navegue até o diretório do projeto:
+```bash
+cd my-portfolio-page
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Digite o seguinte comando:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run docker-first
+```
 
-### Code Splitting
+Ao executar este comando pela primeira vez, cria a imagem Docker, executa o Docker Container, instala as dependências e executa o projeto dentro do Container. Como a criação da imagem e a instalação das dependências só precisa ser feita uma vez, a partir da segunda execução, utilize o seguinte código:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm run docker-dev
+```
 
-### Analyzing the Bundle Size
+Agora você pode visualizar o portfólio acessando http://localhost:8000 no seu navegador.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Após a parada na execução do código anterior, o Docker Container ainda estará em execução. Para pará-lo utilize o seguinte código:
 
-### Making a Progressive Web App
+```bash
+npm run docker-stop
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+## Licença
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Este projeto está licenciado sob a MIT License.
+****
 
-### Deployment
+## Objetivos após modificações
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- [x] remover 3D da Home em dispositivos móveis
 
-### `npm run build` fails to minify
+- [x] tornar todas as páginas responsivas
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [x] atualizar libs
