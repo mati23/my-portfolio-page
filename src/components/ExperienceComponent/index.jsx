@@ -9,6 +9,30 @@ const ExperienceComponent = () => {
 			<h1>Professional Experience</h1>
 
 			<div className={styles.experienceContent}>
+				<h2>VTEX</h2>
+				<div className={styles.experienceDescription}>
+					<h3>Software Engineer II</h3>
+					<ul>
+						<li>
+							Working as a software engineer with several experienced programmers.
+							I work with C# and .NET platform for back-end development. 
+						</li>
+						<li>
+							Development for legacy and modern applications, migrating monolith systems 
+							to several microservice applications.
+						</li>
+						<li>
+							Continued to use AWS but also had first contact with several other tools for CI/CD and
+							observability.
+						</li>
+						<li>
+							I'm making heavy use of Domain Driven Design to improve the systems organization. 
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div className={styles.experienceContent}>
 				<h2>Instituto Atlântico</h2>
 				<div className={styles.experienceDescription}>
 					<h3>Software Engineer II</h3>
@@ -37,7 +61,7 @@ const ExperienceComponent = () => {
 			<div className={styles.experienceContent}>
 				<h2>Logique Sistemas</h2>
 				<div className={styles.experienceDescription}>
-					<h3>Junior Software Engineer</h3>
+					<h3>Software Engineer I</h3>
 					<div className="experience-description">
 						<ol>
 							<li>
@@ -171,6 +195,9 @@ const ExperienceComponent = () => {
 				<ExperienceIconComponent entityName="Reltio" />
 				<ExperienceIconComponent entityName="Azure" />
 				<ExperienceIconComponent entityName="Design-Patterns" />
+				<ExperienceIconComponent entityName="DDD" />
+				<ExperienceIconComponent entityName="DotNet" />
+				<ExperienceIconComponent entityName="Grafana" />
 			</div>
 		</div>
 	)
