@@ -3,13 +3,3 @@
 	src: url("../../resources/fonts/ZrnicRg/zrnicrg.ttf") format("truetype");
 }
 
-.buttonGradient {
-	@apply mt-2 py-2 px-3 w-[16rem] font-bold leading-none hover:translate-x-4 font-[ZrnicRg] duration-100;
-}
-
-.buttonGradient:hover {
-	box-shadow: 10px 5px 5px black;
-	--path: 0% 0, 100% 0, 90% 100%, 0% 100%;
-	clip-path: polygon(var(--path));
-	background-image: linear-gradient(to right, #131b6d, #213dd4, #04befe, #04befe);
-}

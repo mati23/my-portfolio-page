@@ -106,7 +106,7 @@ const ExperienceComponent = () => {
 			</div>
 
 			<div className={styles.experienceContent}>
-				<h2 className="button-gradient experience-button-polygon">3E Engineering</h2>
+				<h2 className="button-gradient experience-button-polygon">3E Engenharia</h2>
 				<div className={styles.experienceDescription}>
 					<h3>Full Stack Developer</h3>
 					<div className="experience-description">
@@ -150,6 +150,10 @@ const ExperienceComponent = () => {
 
 				<div className={styles.experienceDescription}>
 					<ul>
+						<li>
+							<b>.NET Microservices: CQRS & Event Sourcing with Kafka</b> <br />
+							Sean Campbell - Udemy
+						</li>
 						<li>
 							<b>AWS Partner: Accreditation (Technical)</b> <br />
 							Amazon Web Services

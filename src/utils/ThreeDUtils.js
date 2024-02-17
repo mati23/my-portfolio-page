@@ -2,6 +2,7 @@ import * as THREE from "three"
 
 const MAX = 4
 const MIN = -4
+const SCALE_SIZE = 0.050
 
 function getValidLocation() {
 	let validPositions = []
@@ -35,7 +36,8 @@ function generateSphere(color) {
 	const material = new THREE.MeshStandardMaterial({ color: color })
 	const capsule = new THREE.Mesh(geometry, material)
 
-	geometry.scale(0.029, 0.029, 0.029)
+	geometry.scale(SCALE_SIZE, SCALE_SIZE, SCALE_SIZE)
+	geometry.radius = 20
 	geometry.translate(1, 1, 1)
 	material.emissive = new THREE.Color(color)
 	material.emissiveIntensity = 1.6

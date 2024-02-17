@@ -14,7 +14,7 @@
 }
 
 .imageBackground {
-	@apply self-stretch w-full text-white aspect-square overflow-hidden sm:w-2/5;
+	@apply self-stretch w-full text-white overflow-hidden sm:w-2/5;
 }
 
 .imageBackground img {
