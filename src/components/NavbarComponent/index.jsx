@@ -5,7 +5,7 @@ function NavbarComponent() {
 	return (
 		<nav className={styles.navbar}>
 			<div className={styles.container}>
-				<a href="https://flowbite.com/">
+				<a href="/">
 					<img src="https://flowbite.com/docs/images/logo.svg" alt="Flowbite Logo" />
 					<span className={styles.logoName}>Mateus Arruda</span>
 				</a>

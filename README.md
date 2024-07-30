@@ -59,7 +59,7 @@ docker build -t my-portfolio:v1 .
 Ao executar este comando pela primeira vez, cria a imagem Docker, executa o Docker Container, instala as dependências e executa o projeto dentro do Container. Como a criação da imagem e a instalação das dependências só precisa ser feita uma vez, a partir da segunda execução, utilize o seguinte código:
 
 ```bash
-docker run --rm --name  -p 8000:8000 my-portfolio:v1
+docker run --rm --name myporfolio -p 8000:8000 my-portfolio:v1
 ```
 
 Agora você pode visualizar o portfólio acessando http://localhost:8000 no seu navegador.
