@@ -1,14 +1,28 @@
 version: "3.4"
 services:
- vite_docker:
-   image: node:alpine
-   container_name: myportfolio
-   entrypoint: /bin/sh
-   ports:
-     - 8000:8000
-   working_dir: /srv/app
-   volumes:
-     - type: bind
-       source: ./
-       target: /srv/app
-   tty: true
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+       - "5126:5126"
+    environment:
+       - ASPNETCORE_URLS=http://+:5126
+    networks:
+       - app-network
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "8000:8000" # NGINX default port
+    networks:
+      - app-network
+       
+   
+networks:
+  app-network:
+    driver: bridge
