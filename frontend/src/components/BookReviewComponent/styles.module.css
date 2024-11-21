@@ -1,0 +1,57 @@
+@font-face {
+	font-family: "PlayFairItalic";
+	src: url("../../resources/fonts/TextFonts.net_robinson-press-font/Webfont/RobinsonPress.woff")
+		format("truetype");
+}
+
+@font-face {
+	font-family: "YanoneSemiBold";
+	src: url("../../resources/fonts/Yanone_Kaffeesatz/static/YanoneKaffeesatz-SemiBold.ttf")
+		format("truetype");
+}
+
+@font-face {
+	font-family: "YanoneRegular";
+	src: url("../../resources/fonts/Yanone_Kaffeesatz/static/YanoneKaffeesatz-Regular.ttf")
+		format("truetype");
+}
+
+.bookReview {
+	@apply flex flex-col items-center gap-4 bg-[#041b27] text-gray-300 text-justify;
+}
+
+.bookReview img {
+	@apply w-[80rem] rounded-lg 2xl:w-[90rem];
+}
+
+.bookTitle {
+	@apply mt-10 text-8xl text-center font-[PlayFairItalic];
+}
+
+.bookDescription {
+	@apply relative gap-8 columns-1 w-[80rem] max-w-[95vw] pb-6 sm:columns-2 xl:columns-3 2xl:w-[90rem];
+}
+
+.bookDescription p {
+	@apply indent-8 my-2;
+}
+
+.bookDescription p:first-child {
+	@apply indent-0;
+}
+
+.bookDescription p:first-child::first-letter {
+	@apply pt-1 pr-1 text-[#00818a] text-6xl font-bold float-left leading-none;
+}
+
+.bookDescription ul, .bookDescription ol {
+	@apply ml-5 mb-2 list-disc list-inside text-left;
+}
+
+.bookDescription ul {
+	@apply list-disc;
+}
+
+.bookDescription ol {
+	@apply list-decimal;
+}

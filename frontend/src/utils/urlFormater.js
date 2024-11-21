@@ -1,0 +1,1 @@
+export const urlFormater = (url) => Array.isArray(url) ? url.join("/") : ""

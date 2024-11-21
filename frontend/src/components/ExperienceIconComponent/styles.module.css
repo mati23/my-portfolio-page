@@ -1,0 +1,11 @@
+.iconContainer {
+	@apply flex flex-col text-center mx-2 mb-10;
+}
+
+.iconContainer img {
+	@apply w-full aspect-square rounded-lg;
+}
+
+.iconContainer span {
+	@apply w-full font-bold text-center;
+}

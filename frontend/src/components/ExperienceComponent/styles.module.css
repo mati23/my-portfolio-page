@@ -1,0 +1,45 @@
+@font-face {
+	font-family: "ZrnicRg";
+	src: url("../../resources/fonts/ZrnicRg/zrnicrg.ttf") format("truetype");
+}
+
+.container {
+	@apply flex flex-col p-4 w-[75rem] max-w-[95vw] bg-[#0a0e11] sm:p-10;
+}
+
+.container h1 {
+	@apply flex items-center gap-4 -mx-4 text-3xl whitespace-nowrap;
+	font-family: "ZrnicRg";
+}
+
+.container h1:nth-child(n+2) {
+	@apply mt-8;
+}
+
+.container h1:after {
+	content: "";
+	@apply w-1/2 h-2 bg-white border border-white;
+}
+
+.educationContent h2, .experienceContent h2 {
+	@apply mt-2 py-2 px-3 w-[16rem] font-bold leading-none hover:scale-110 duration-100 font-[ZrnicRg];
+	--path: 0% 0, 100% 0, 90% 100%, 0% 100%;
+    clip-path: polygon(var(--path));    
+    background-image: linear-gradient(to right, #131B6D, #213DD4, #04befe);
+}
+
+.experienceDescription {
+	@apply my-2 pl-4;
+}
+
+.experienceDescription h3 {
+	@apply text-[110%] font-[ZrnicRg];
+}
+
+.experienceDescription li {
+	@apply list-disc list-inside;
+}
+
+.techIcons {
+	@apply grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6;
+}

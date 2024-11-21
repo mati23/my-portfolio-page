@@ -1,0 +1,11 @@
+.onlyIcon {
+	@apply flex flex-col items-center bg-[#facc6b] border border-black shadow-sm shadow-black rounded-lg;
+}
+
+.imageIcon {
+	@apply w-10 m-1 p-1 bg-white rounded;
+}
+
+.description {
+	@apply mb-1 text-xs text-black;
+}
