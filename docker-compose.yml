@@ -1,17 +1,5 @@
 version: "3.4"
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: backend
-    ports:
-       - "5126:5126"
-    environment:
-       - ASPNETCORE_URLS=http://+:5126
-    networks:
-       - app-network
-  
   frontend:
     build:
       context: ./frontend

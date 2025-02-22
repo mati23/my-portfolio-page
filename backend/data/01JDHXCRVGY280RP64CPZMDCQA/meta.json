@@ -1,0 +1,17 @@
+{
+	"ulid": "01JDHXCRVGY280RP64CPZMDCQA",
+	"minTime": 1732536001585,
+	"maxTime": 1732543200000,
+	"stats": {
+		"numSamples": 370,
+		"numSeries": 5,
+		"numChunks": 10
+	},
+	"compaction": {
+		"level": 1,
+		"sources": [
+			"01JDHXCRVGY280RP64CPZMDCQA"
+		]
+	},
+	"version": 1
+}
