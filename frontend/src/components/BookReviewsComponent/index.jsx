@@ -1,23 +1,13 @@
-import '../../resources/fonts/Bebas_Neue/BebasNeue-Regular.ttf'
 import BookReviewThumbnailComponent from "../BookReviewThumbnailComponent"
-import NavbarComponent from '../NavbarComponent'
-
+import { BOOK_SLUGS } from "../../content/catalog"
+import PageMeta from "../PageMeta"
 import styles from "./styles.module.css"
-
-const BookReviewsComponent = () => {
-	return (
-		<>
-			<NavbarComponent />
-			<div>
-				<div className={styles.bookGrid}>
-					<BookReviewThumbnailComponent bookFolderName="o-livro-da-economia" />
-					<BookReviewThumbnailComponent bookFolderName="make-it-stick" />
-					<BookReviewThumbnailComponent bookFolderName="o-mundo-assombrado-por-demonios" />
-					<BookReviewThumbnailComponent bookFolderName="habitos-atomicos" />
-				</div>
-			</div>
-		</>
-	)
+export default function BookReviewsComponent() {
+  return <>
+    <PageMeta title="Book Reviews" description="Reading notes and book reviews by Mateus Arruda." />
+    <h1 className="sr-only">Book Reviews</h1>
+    <div className={styles.bookGrid}>
+      {BOOK_SLUGS.map(slug => <BookReviewThumbnailComponent key={slug} bookFolderName={slug} />)}
+    </div>
+  </>
 }
-
-export default BookReviewsComponent

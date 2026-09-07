@@ -1,44 +1,16 @@
-import { useEffect, useRef, useState } from "react"
-import initiateThreeJS from "../../utils/initiateThreeJS"
-
 import MenuButtonComponent from "../MenuButtonComponent"
-
+import SceneBackground from "../SceneBackground"
+import PageMeta from "../PageMeta"
 import styles from "./styles.module.css"
-
-const HomeComponent = () => {
-	const canvas3d = useRef()
-	const [onMobile, setOnMobile] = useState(false)
-	const [data, setData] = useState(null)
-
-
-
-	useEffect(() => {
-		const widthScreen = window.innerWidth
-		const heightScreen = window.innerHeight
-		if (widthScreen / heightScreen > 1) {
-			const { renderer } = initiateThreeJS()
-			canvas3d.current.replaceWith(renderer.domElement)
-			return
-		}
-
-		setOnMobile(true)
-	})
-
-	return (
-		<div className={styles.homeComponentContainer} id={styles.homeComponentContainer}>
-			<div className={styles.welcomeMessageContainer}>Mateus Arruda</div>
-			<div> {data}</div>
-			<div className={styles.menuContainer}>
-				<MenuButtonComponent index={1} text={"Favorites"} reference="/myfavourites" />
-				<MenuButtonComponent index={2} text={"Book Reviews"} reference="/bookreviews" />
-				<MenuButtonComponent index={3} text={"Portfolio"} reference="/myportfolio" />
-			</div>
-			<div className={styles.canvas3d}><canvas ref={canvas3d}></canvas></div>
-			{onMobile &&
-				<div className={styles.ps2Screen}><img src="./ps2-screen.png" /></div>}
-		</div>
-	)
+export default function HomeComponent() {
+  return <div className={styles.homeComponentContainer}>
+    <PageMeta title="Mateus Arruda" description="Mateus Arruda — software engineer. Explore my portfolio, book reviews and favorites." />
+    <h1 className={styles.welcomeMessageContainer}>Mateus Arruda</h1>
+    <nav className={styles.menuContainer} aria-label="Explore the portfolio">
+      <MenuButtonComponent index={1} text="Favorites" reference="/myfavourites" />
+      <MenuButtonComponent index={2} text="Book Reviews" reference="/bookreviews" />
+      <MenuButtonComponent index={3} text="Portfolio" reference="/myportfolio" />
+    </nav>
+    <SceneBackground className={styles.canvas3d} fallbackClassName={styles.ps2Screen} />
+  </div>
 }
-
-export default HomeComponent;
-

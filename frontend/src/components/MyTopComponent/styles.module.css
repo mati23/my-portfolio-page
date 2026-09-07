@@ -7,7 +7,7 @@
 }
 
 .timelineButtons div {
-	@apply relative flex justify-between items-center gap-20 w-full max-w-[95%] m-auto py-2 px-1;
+	@apply relative flex justify-between items-center gap-4 w-full max-w-[95%] m-auto py-2 px-1;
 }
 
 .timelineButtons:before {
@@ -20,7 +20,7 @@
 }
 
 .activeButton {
-	@apply bg-sky-500 from-blue-700 via-blue-500 scale-110 font-bold;
+	@apply bg-sky-500 from-blue-700 via-blue-500 scale-110 font-bold text-slate-950;
 }
 
 .timelineInfo {
@@ -30,13 +30,8 @@
 	@apply flex flex-col items-center gap-10 m-auto;
 }
 
-@font-face {
-	font-family: "ZrnicRg";
-	src: url("../../resources/fonts/ZrnicRg/zrnicrg.ttf") format("truetype");
-}
-
 .buttonGradient {
-	@apply mt-2 py-2 px-3 w-[16rem] font-bold leading-none hover:translate-x-4 font-[ZrnicRg] duration-100;
+	@apply mt-2 py-2 px-3 w-[16rem] font-bold leading-none hover:translate-x-4 font-[Display] duration-100;
 }
 
 .buttonGradient2 {

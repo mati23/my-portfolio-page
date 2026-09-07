@@ -1,12 +1,11 @@
 import styles from "./styles.module.css"
-import "./styles.module.css"
 
 function ExperienceIconComponent(props) {
 	const { entityName, iconOnly } = props
 
 	return (
 		<div className={styles.iconContainer}>
-			<img src={"/resources/icons/" + entityName.toLowerCase() + ".png"} />
+			<img alt={iconOnly ? entityName : ""} loading="lazy" decoding="async" width="64" height="64" src={"/resources/icons/" + entityName.toLowerCase() + ".png"} />
 
 			{!iconOnly && <div>
 				<span>{entityName.replaceAll("-", " ")}</span>

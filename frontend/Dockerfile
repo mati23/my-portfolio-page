@@ -1,22 +1,16 @@
-# Stage 1: Build the app
-FROM node:20 AS build
+FROM node:24.20.0-alpine@sha256:e67514e5d0f6c46656005e1b693b2ec9d52e80b641307de684d4a015ba7a4eaf AS build
+RUN apk upgrade --no-cache && npm install --global npm@11.19.1
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install --force
-RUN npm install -g vite@latest -D
+RUN npm ci
 COPY . .
+ARG VITE_SITE_URL=""
+ENV VITE_SITE_URL=$VITE_SITE_URL
 RUN npm run build
 
-# Stage 2: Serve the app using vite preview
-FROM node:20
-WORKDIR /app
-COPY --from=build /app/dist /app/dist
-COPY package.json package-lock.json ./
-RUN npm install --production --force
-RUN npm install -g vite@latest -D
-
-# Expose the port vite preview runs on (default is 4173)
+FROM nginxinc/nginx-unprivileged:stable-alpine@sha256:442753882674b49ae2c1de83ed67896131c0777f56df5005e356e62bc3f7e7ce AS final
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /usr/share/nginx/html
+USER 101
 EXPOSE 4173
-
-# Start the app in preview mode
-CMD ["npm", "run", "preview"]
+HEALTHCHECK --interval=30s --timeout=3s CMD wget -q -O /dev/null http://127.0.0.1:4173/ || exit 1

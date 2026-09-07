@@ -7,7 +7,7 @@ function IconComponent(props) {
 
 	return (
 		<div className={styles.onlyIcon}>
-			<div className={styles.imageIcon}><img src={imageIcon} alt="" /></div>
+			<div className={styles.imageIcon}><img src={imageIcon} alt={iconOnly ? entityName : ""} width="32" height="32" loading="lazy" decoding="async" /></div>
 			{ !iconOnly && <div className={styles.description}>{entityName}</div> }
 		</div>
 	)

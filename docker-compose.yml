@@ -1,16 +1,29 @@
-version: "3.4"
 services:
   frontend:
     build:
       context: ./frontend
+      args:
+        VITE_SITE_URL: ${VITE_SITE_URL:-}
       dockerfile: Dockerfile
     container_name: frontend
     ports:
-      - "4173:4173" # NGINX default port
+      - "4173:4173"
     networks:
       - app-network
-       
-   
+
+  backend:
+    profiles: ["backend"]
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:5126:5126"
+    expose:
+      - "9464"
+    networks:
+      - app-network
+
+
 networks:
   app-network:
     driver: bridge

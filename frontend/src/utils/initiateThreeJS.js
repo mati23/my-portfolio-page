@@ -1,146 +1,122 @@
 import * as THREE from "three"
-import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass"
-import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer"
-import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass"
-import { AfterimagePass } from "three/examples/jsm/postprocessing/AfterimagePass"
-import { GrannyKnot, TorusKnot, TrefoilKnot, VivianiCurve } from "three/examples/jsm/curves/CurveExtras"
-
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js"
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js"
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js"
+import { AfterimagePass } from "three/examples/jsm/postprocessing/AfterimagePass.js"
+import { GrannyKnot, TorusKnot, TrefoilKnot, VivianiCurve } from "three/examples/jsm/curves/CurveExtras.js"
 import ThreeDUtils from "./ThreeDUtils"
 
-const initiateThreeJS = () => {
-	const animateSmoke = (smokesArray) => {
-		requestAnimationFrame(animateSmoke)
-		evolveSmoke(smokesArray)
-	}
-
-	const evolveSmoke = (smokesArray) => {
-		const delta = clock.getDelta()
-		let sp = smokesArray.length
-		while (sp--) {
-			smokesArray[sp].rotation.z += delta * 20.5
-		}
-	}
-
-	const animateTransparentCubes = () => {
-		const delta = clock.getDelta()
-		requestAnimationFrame(animateTransparentCubes)
-
-		for (let listItem = 0; listItem < transparentCubeList.length; listItem++) {
-			if (listItem % 2 == 0) {
-				transparentCubeList[listItem].rotation.z += delta * 0.1
-				transparentCubeList[listItem].rotation.x += delta * 0.1
-			} else {
-				transparentCubeList[listItem].rotation.z += delta * -0.1
-				transparentCubeList[listItem].rotation.x += delta * -0.1
-			}
-
-		}
-	}
-
-	const animateCapsule = () => {
-		const time = clock.getElapsedTime()
-		const looptime = 20
-		const t = (time % looptime) / looptime
-
-		for (let item = 0; item <= 4; item++) {
-			const position = lightPathCurves[item].geometry.parameters.path.getPoint(t)
-			lightBulbs[item].position.add(position).multiply(new THREE.Vector3(0.05, 0.05, 0))
-				.sub(new THREE.Vector3(1.5, 0.1, -0.2))
-		}
-
-		requestAnimationFrame(animateCapsule)
-		composer.render(scene, camera)
-	}
-
-	const widthScreen = window.innerWidth
-	const heightScreen = window.innerHeight
-	const aspectRatio = widthScreen / heightScreen
-
-	const light = new THREE.SpotLight(0x11155C)
-	const clock = new THREE.Clock()
-	const scene = new THREE.Scene()
-	const renderer = new THREE.WebGLRenderer({ alpha: true })
-	const camera = new THREE.PerspectiveCamera(80, aspectRatio, 0.1, 1000)
-
-	const cubeList = ThreeDUtils.generateCubeList(20)
-	const transparentCubeList = ThreeDUtils.generateTransparentCubes(2)
-	const lightBulbs = []
-	const lightPathCurves = []
-	const colors = [0xff1900, 0x22ff22, 0x0000ff, 0xf0ff11]
-	const curves = [new GrannyKnot(), new TrefoilKnot(), new TorusKnot(), new VivianiCurve()]
-	const renderScene = new RenderPass(scene, camera)
-
-	scene.background = new THREE.Color(0x000000)
-	const composer = new EffectComposer(renderer)
-	composer.addPass(renderScene)
-
-	const smokesArray = []
-
-	for (let item = 0; item <= 4; item++) {
-		const capsule = ThreeDUtils.generateSphere(colors[item])
-		lightBulbs.push(capsule)
-	}
-
-	for (let i = 0; i <= 4; i++) {
-		const grannyKnotCurve = curves[i]
-		const geometryCurve = new THREE.TubeGeometry(grannyKnotCurve, 100, 1, 3, true)
-		const curveMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff, wireframe: true, side: THREE.FrontSide })
-		const tube = new THREE.Mesh(geometryCurve, curveMaterial)
-		tube.position.set(i, i, 0)
-		tube.rotation.set(0, 0, i * 2.45)
-		tube.scale.set(0.1 * i, 0.1, 0.0)
-		lightPathCurves.push(tube)
-
-	}
-
-	const bloomPass = new UnrealBloomPass(
-		new THREE.Vector2(widthScreen, heightScreen),
-		2.6,
-		0.8,
-		0.6
-	)
-
-	composer.addPass(bloomPass)
-	composer.setSize(widthScreen, heightScreen)
-
-	const afterImagePass = new AfterimagePass()
-	afterImagePass.uniforms["damp"] = { value: 0.9811 }
-	composer.addPass(afterImagePass)
-
-
-	for (let p = 0; p < 40; p++) {
-		const particle = ThreeDUtils.generateSmokeCube()
-		particle.position.set(
-			Math.random() * 500 - 250,
-			Math.random() * 500 - 250,
-			Math.random() * 3 - 4
-		)
-		particle.rotation.z = Math.random() * 360
-		scene.add(particle)
-		smokesArray.push(particle)
-	}
-
-	const plane = ThreeDUtils.generatePlane()
-	scene.add(plane)
-	light.position.set(0, 0, 2.5)
-	light.penumbra = 0.5
-	light.intensity = 5
-
-	renderer.setSize(widthScreen, heightScreen)
-
-	cubeList.forEach((cube) => scene.add(cube))
-	transparentCubeList.forEach((cube) => scene.add(cube))
-
-	scene.add(light)
-	lightBulbs.forEach(lightBulb => scene.add(lightBulb))
-	scene.fog = new THREE.Fog(0x000000, 1, 12.8)
-	camera.position.z = 6
-
-	animateTransparentCubes()
-	animateSmoke(smokesArray)
-	animateCapsule()
-
-	return { renderer }
+export default function initiateThreeJS(container, onContextLost) {
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false })
+  const scene = new THREE.Scene()
+  const camera = new THREE.PerspectiveCamera(80, 1, 0.1, 1000)
+  const composer = new EffectComposer(renderer)
+  const clock = new THREE.Clock()
+  let frame = 0
+  let elapsed = 0
+  let disposed = false
+  let observer
+  const dispose = () => {
+    if (disposed) return
+    disposed = true
+    cancelAnimationFrame(frame)
+    observer?.disconnect()
+    document.removeEventListener("visibilitychange", visibility)
+    renderer.domElement.removeEventListener("webglcontextlost", contextLost)
+    const resources = new Set()
+    scene.traverse(object => {
+      if (object.geometry) resources.add(object.geometry)
+      for (const material of (Array.isArray(object.material) ? object.material : [object.material])) {
+        if (!material) continue
+        resources.add(material)
+        for (const value of Object.values(material)) if (value?.isTexture) resources.add(value)
+      }
+    })
+    resources.forEach(resource => resource.dispose())
+    composer.passes.forEach(pass => pass.dispose?.())
+    composer.dispose()
+    renderer.dispose()
+    renderer.forceContextLoss()
+    renderer.domElement.remove()
+    scene.clear()
+  }
+  const contextLost = event => { event.preventDefault(); dispose(); onContextLost?.() }
+  const visibility = () => {
+    cancelAnimationFrame(frame)
+    if (!document.hidden && !disposed) { clock.start(); frame = requestAnimationFrame(animate) }
+  }
+  let animate
+  try {
+    scene.background = new THREE.Color(0x000000)
+    scene.fog = new THREE.Fog(0x000000, 1, 12.8)
+    camera.position.z = 6
+    const light = new THREE.SpotLight(0x11155c)
+    light.position.set(0, 0, 2.5)
+    light.penumbra = 0.5
+    light.intensity = 5
+    scene.add(light)
+    ThreeDUtils.generateCubeList(20).forEach(cube => scene.add(cube))
+    const transparent = ThreeDUtils.generateTransparentCubes(2)
+    transparent.forEach(cube => scene.add(cube))
+    const curves = [new GrannyKnot(), new TrefoilKnot(), new TorusKnot(), new VivianiCurve()]
+    const bulbs = [0xff1900, 0x22ff22, 0x0000ff, 0xf0ff11].map(color => ThreeDUtils.generateSphere(color))
+    bulbs.forEach(bulb => scene.add(bulb))
+    const texture = ThreeDUtils.generateSmokeTexture()
+    const smoke = Array.from({ length: 40 }, () => {
+      const particle = ThreeDUtils.generateSmokeCube(texture)
+      particle.position.set(Math.random() * 500 - 250, Math.random() * 500 - 250, Math.random() * 3 - 4)
+      particle.rotation.z = Math.random() * Math.PI * 2
+      scene.add(particle)
+      return particle
+    })
+    scene.add(ThreeDUtils.generatePlane())
+    composer.addPass(new RenderPass(scene, camera))
+    composer.addPass(new UnrealBloomPass(new THREE.Vector2(1, 1), 2.6, 0.8, 0.6))
+    const afterimage = new AfterimagePass()
+    afterimage.uniforms.damp.value = 0.9811
+    composer.addPass(afterimage)
+    const resize = () => {
+      if (disposed) return
+      const width = Math.max(1, container.clientWidth)
+      const height = Math.max(1, container.clientHeight)
+      // Bound postprocessing buffers even on large or high-DPI displays.
+      const ratio = Math.min(window.devicePixelRatio || 1, 1.5, 1920 / width, 1080 / height)
+      renderer.setPixelRatio(ratio)
+      renderer.setSize(width, height)
+      composer.setPixelRatio(ratio)
+      composer.setSize(width, height)
+      camera.aspect = width / height
+      camera.updateProjectionMatrix()
+    }
+    animate = () => {
+      if (disposed || document.hidden) return
+      const delta = Math.min(clock.getDelta(), 0.05)
+      elapsed += delta
+      const progress = (elapsed % 20) / 20
+      smoke.forEach(particle => { particle.rotation.z += delta * 0.2 })
+      transparent.forEach((cube, index) => {
+        const step = delta * (index % 2 ? -0.1 : 0.1)
+        cube.rotation.x += step
+        cube.rotation.z += step
+      })
+      bulbs.forEach((bulb, index) => {
+        bulb.position.copy(curves[index].getPoint(progress)).multiply(new THREE.Vector3(0.05, 0.05, 0))
+          .sub(new THREE.Vector3(1.5, 0.1, -0.2))
+      })
+      composer.render(delta)
+      frame = requestAnimationFrame(animate)
+    }
+    renderer.domElement.setAttribute("aria-hidden", "true")
+    container.append(renderer.domElement)
+    renderer.domElement.addEventListener("webglcontextlost", contextLost)
+    document.addEventListener("visibilitychange", visibility)
+    observer = new ResizeObserver(resize)
+    observer.observe(container)
+    resize()
+    if (!document.hidden) frame = requestAnimationFrame(animate)
+    return { dispose }
+  } catch (error) {
+    dispose()
+    throw error
+  }
 }
-
-export default initiateThreeJS

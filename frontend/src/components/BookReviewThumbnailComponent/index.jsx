@@ -1,53 +1,22 @@
-import React, { useEffect, useState } from "react"
-import '../../resources/fonts/Bebas_Neue/BebasNeue-Regular.ttf'
-
+import { Link } from "react-router-dom"
+import { useContent } from "../../hooks/useContent"
+import ContentState from "../ContentState"
 import styles from "./styles.module.css"
-import "./styles.module.css"
-import { urlFormater } from "../../utils/urlFormater"
 
-const BookReviewThumbnailComponent = (props) => {
-	const { bookFolderName } = props
-	const [bookTitle, setBookTitle] = useState("Book Title")
-	const [bookPublisher, setBookPublisher] = useState("Book Publisher")
-	const [bookAuthors, setBookAuthors] = useState([])
-
-	function getJsonFileForEntityAndYear() {
-		const url = urlFormater(["/resources/books", bookFolderName, "review.json"])
-		fetch(url)
-			.then((response) => response.json())
-			.then((data) => {
-				console.log(data["bookName"])
-				setBookTitle(data["bookName"])
-				setBookPublisher(data["bookPublisher"])
-				setBookAuthors(data["bookAuthors"])
-			})
-	}
-
-	useEffect(() => { getJsonFileForEntityAndYear() }, [])
-
-	return (
-		<div className={styles.container}>
-			<div>
-				<div className={styles.bookPicture}>
-					<img src={urlFormater(["/resources/books", bookFolderName, "thumbnail.jpg"])} />
-				</div>
-				<div className={styles.bookInfo}>
-					<a className={styles.bookTitle} href={"bookreviews/" + bookFolderName}>
-						{bookTitle}
-					</a>
-
-					<div className={styles.bookInfoAuthor}>
-						{/* { bookAuthors.length > 1 ? "Autores" : "Autor" } : */}
-						{ bookAuthors.map((author) => <span key={author}>{author}</span>) }
-					</div>
-
-					<div className={styles.bookInfoPublisher}>
-						{bookPublisher}
-					</div>
-
-				</div>
-			</div>
-		</div>)
+export default function BookReviewThumbnailComponent({ bookFolderName }) {
+  const resource = useContent(`book:${bookFolderName}`)
+  const book = resource.data
+  return <article className={styles.container}>
+    <div>
+      <div className={styles.bookPicture}>
+        <img src={`/resources/books/${bookFolderName}/thumbnail.webp`} width="160" height="160"
+          loading="lazy" decoding="async" alt={book ? `Cover of ${book.bookName}` : "Book cover"} />
+      </div>
+      {book ? <div className={styles.bookInfo}>
+        <h2><Link className={styles.bookTitle} to={`/bookreviews/${bookFolderName}`}>{book.bookName}</Link></h2>
+        <div className={styles.bookInfoAuthor}>{book.bookAuthors.map(author => <span key={author}>{author}</span>)}</div>
+        <div className={styles.bookInfoPublisher}>{book.bookPublisher}</div>
+      </div> : <ContentState {...resource} label="book details" />}
+    </div>
+  </article>
 }
-
-export default BookReviewThumbnailComponent

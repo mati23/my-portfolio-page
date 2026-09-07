@@ -1,30 +1,22 @@
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom"
-
-import BookReviewsComponent from "./components/BookReviewsComponent"
-import BookReviewComponent from "./components/BookReviewComponent"
-import PortfolioComponent from "./components/PortfolioComponent"
-import MyTopComponent from "./components/MyTopComponent"
+import { lazy, Suspense } from "react"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Root from "./routes/root"
 import HomeComponent from "./components/HomeComponent"
-
-import "./index.css"
-
-function App() {
-
-	return (
-		<div className="App">
-			<div className="router-container">
-				<BrowserRouter>
-					<Routes>
-						<Route exact path="/" element={<HomeComponent />} />
-						<Route path="myfavourites" element={<MyTopComponent />} />
-						<Route path="myportfolio" element={<PortfolioComponent />} />
-						<Route path="bookreviews" element={<BookReviewsComponent />} />
-						<Route path="bookreviews/:bookId" element={<BookReviewComponent />} />
-					</Routes>
-				</BrowserRouter>
-			</div>
-		</div>
-	)
+import NotFoundPage from "./pages/NotFoundPage"
+import PageErrorBoundary from "./components/PageErrorBoundary"
+const BookReviews = lazy(() => import("./components/BookReviewsComponent"))
+const BookReview = lazy(() => import("./components/BookReviewComponent"))
+const Portfolio = lazy(() => import("./components/PortfolioComponent"))
+const Favorites = lazy(() => import("./components/MyTopComponent"))
+export default function App() {
+  return <PageErrorBoundary><BrowserRouter><Suspense fallback={<p className="content-state" role="status">Loading page…</p>}>
+    <Routes><Route element={<Root />}>
+      <Route index element={<HomeComponent />} />
+      <Route path="myfavourites" element={<Favorites />} />
+      <Route path="myportfolio" element={<Portfolio />} />
+      <Route path="bookreviews" element={<BookReviews />} />
+      <Route path="bookreviews/:bookId" element={<BookReview />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Route></Routes>
+  </Suspense></BrowserRouter></PageErrorBoundary>
 }
-
-export default App

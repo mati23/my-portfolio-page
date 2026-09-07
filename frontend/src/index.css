@@ -28,3 +28,18 @@ body {
 	min-height: 100vh;
 }
 
+
+body { color: #e2e8f0; background: #0a0e11; }
+a, button { touch-action: manipulation; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid #67e8f9; outline-offset: 4px; }
+#main-content:focus { outline: none; }
+.skip-link { position: fixed; top: -100px; left: 1rem; z-index: 100; background: #fff; color: #0a0e11; padding: 0.75rem 1rem; }
+.skip-link:focus { top: 1rem; }
+.content-state { padding: 2rem 1rem; max-width: 48rem; margin: auto; text-align: center; }
+.content-state h1 { font-size: 2rem; margin-bottom: 1rem; }
+.action-link, .review-navigation a { display: inline-block; margin: 1rem 0; padding: 0.5rem 1rem; border: 1px solid #67e8f9; border-radius: 0.4rem; color: #a5f3fc; }
+.review-navigation { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

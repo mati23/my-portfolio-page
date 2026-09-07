@@ -1,24 +1,23 @@
 import ExperienceIconComponent from "../ExperienceIconComponent"
 
 import styles from "./styles.module.css"
-import "./styles.module.css"
 
 const ExperienceComponent = () => {
 	return (
 		<div className={styles.container}>
-			<h1>Professional Experience</h1>
+			<h2 className={styles.sectionTitle}>Professional Experience</h2>
 
 			<div className={styles.experienceContent}>
-				<h2>VTEX</h2>
+				<h3>VTEX</h3>
 				<div className={styles.experienceDescription}>
-					<h3>Software Engineer II</h3>
+					<h4>Software Engineer II</h4>
 					<ul>
 						<li>
 							Working as a software engineer with several experienced programmers.
-							I work with C# and .NET platform for back-end development. 
+							I work with C# and .NET platform for back-end development.
 						</li>
 						<li>
-							Development for legacy and modern applications, migrating monolith systems 
+							Development for legacy and modern applications, migrating monolith systems
 							to several microservice applications.
 						</li>
 						<li>
@@ -26,16 +25,16 @@ const ExperienceComponent = () => {
 							observability.
 						</li>
 						<li>
-							I'm making heavy use of Domain Driven Design to improve the systems organization. 
+							I'm making heavy use of Domain Driven Design to improve the systems organization.
 						</li>
 					</ul>
 				</div>
 			</div>
 
 			<div className={styles.experienceContent}>
-				<h2>Instituto Atlântico</h2>
+				<h3>Instituto Atlântico</h3>
 				<div className={styles.experienceDescription}>
-					<h3>Software Engineer II</h3>
+					<h4>Software Engineer II</h4>
 					<ul>
 						<li>
 							Working as software engineer in a Hewlett-Packard Enterprise
@@ -59,10 +58,10 @@ const ExperienceComponent = () => {
 			</div>
 
 			<div className={styles.experienceContent}>
-				<h2>Logique Sistemas</h2>
+				<h3>Logique Sistemas</h3>
 				<div className={styles.experienceDescription}>
-					<h3>Software Engineer I</h3>
-					<div className="experience-description">
+					<h4>Software Engineer I</h4>
+					<div className={styles.experienceDescription}>
 						<ol>
 							<li>
 								Helped developing a gas distribution system for Copergas
@@ -83,10 +82,10 @@ const ExperienceComponent = () => {
 			</div>
 
 			<div className={styles.experienceContent}>
-				<h2>MagniFinance</h2>
+				<h3>MagniFinance</h3>
 				<div className={styles.experienceDescription}>
-					<h3>Full Stack Developer</h3>
-					<div className="experience-description">
+					<h4>Full Stack Developer</h4>
+					<div className={styles.experienceDescription}>
 						<ol>
 							<li>
 								Worked on a fintech startup focused on emiting invoices in the
@@ -106,10 +105,10 @@ const ExperienceComponent = () => {
 			</div>
 
 			<div className={styles.experienceContent}>
-				<h2 className="button-gradient experience-button-polygon">3E Engenharia</h2>
+				<h3 >3E Engenharia</h3>
 				<div className={styles.experienceDescription}>
-					<h3>Full Stack Developer</h3>
-					<div className="experience-description">
+					<h4>Full Stack Developer</h4>
+					<div className={styles.experienceDescription}>
 						<ol>
 							<li>
 								Worked in the back-end and front-end of a electrical power
@@ -122,14 +121,14 @@ const ExperienceComponent = () => {
 
 			</div>
 
-			<h1>Education</h1>
+			<h2 className={styles.sectionTitle}>Education</h2>
 
 			<div className={styles.educationContent}>
-				<h2>Universidade Federal do Ceará</h2>
+				<h3>Universidade Federal do Ceará</h3>
 
 				<div className={styles.experienceDescription}>
-					<h3>Computer Engineering</h3>
-					<div className="experience-description">
+					<h4>Computer Engineering</h4>
+					<div className={styles.experienceDescription}>
 						<ul>
 							<li>
 								Started learning the basics of every engineering course with classes like Calculus, Physics, Linear Algebrar, etc;
@@ -146,7 +145,7 @@ const ExperienceComponent = () => {
 			</div>
 
 			<div className={styles.educationContent}>
-				<h2>Certificates</h2>
+				<h3>Certificates</h3>
 
 				<div className={styles.experienceDescription}>
 					<ul>
@@ -186,7 +185,7 @@ const ExperienceComponent = () => {
 				</div>
 			</div>
 
-			<h1>Additional Skills</h1>
+			<h2 className={styles.sectionTitle}>Additional Skills</h2>
 			<div className={styles.techIcons}>
 				<ExperienceIconComponent entityName="Lambda" />
 				<ExperienceIconComponent entityName="CloudWatch" />

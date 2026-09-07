@@ -1,4 +1,4 @@
-.container { @apply hidden; }
+
 .activeContainer {
 	@apply flex flex-col gap-2 w-[50rem] max-w-[95vw] p-4 text-base rounded-xl sm:flex-row 2xl:w-[75rem] 2xl:p-6;
     animation: fadeIn 2s;
@@ -36,3 +36,4 @@
 .description {
 	@apply text-base overflow-auto overflow-x-hidden sm:w-full sm:aspect-square 2xl:text-lg 2xl:aspect-[16/9];
 }
+.info { background: rgb(10 14 17 / 88%); color: #f1f5f9; border-radius: 0.5rem; }
