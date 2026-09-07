@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { ColorExtractor } from "react-color-extractor"
+import { extractColors } from "../../utils/extractColors"
 
 import IconComponent from "../IconComponent"
 import { urlFormater } from "../../utils/urlFormater"
@@ -15,6 +15,17 @@ const TopInfoComponent = (props) => {
 	const [colors, setColors] = useState([])
 
 	const containerClass = activeYear === year ? styles.activeContainer : styles.container
+
+	useEffect(() => {
+		if (!imgSource) return
+		let active = true
+		extractColors(imgSource).then(palette => {
+			if (active) setColors(palette)
+		}).catch(() => {
+			if (active) setColors([])
+		})
+		return () => { active = false }
+	}, [imgSource])
 
 	const getJsonFileForEntityAndYear = () => {
 		fetch(urlFormater(["/resources/backgrounds", year, "descriptions.json"]))
@@ -39,9 +50,7 @@ const TopInfoComponent = (props) => {
 			style={{ backgroundColor: colors[0] ? colors[0] + "a8" : "transparent" }}>
 			<div className={styles.imageBackground}>
 
-				<ColorExtractor getColors={colorArray => setColors(colorArray)}>
-					<img src={imgSource} alt={year + " - " + entityTitle} />
-				</ColorExtractor>
+				<img src={imgSource || undefined} alt={year + " - " + entityTitle} />
 			</div>
 
 			<div className={styles.info}>

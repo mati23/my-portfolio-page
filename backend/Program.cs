@@ -1,5 +1,21 @@
 using Prometheus;
+
+// The runtime image intentionally has no shell or curl.
+if (args is ["--health-check"])
+{
+    using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(2) };
+    try
+    {
+        using var response = await client.GetAsync("http://127.0.0.1:5126/health");
+        Environment.Exit(response.IsSuccessStatusCode ? 0 : 1);
+    }
+    catch (HttpRequestException) { Environment.Exit(1); }
+    catch (TaskCanceledException) { Environment.Exit(1); }
+    return;
+}
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHealthChecks();
 
 builder.Services.AddCors(options =>
 {
@@ -14,6 +30,24 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// Health probes remain HTTP inside the container; TLS terminates at the ingress.
+app.UseHealthChecks("/health");
+
+// A separate, unpublished port keeps metrics out of the public API.
+// Check the actual socket, not the caller-controlled Host header.
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/metrics") &&
+        context.Connection.LocalPort != 9464 &&
+        !(app.Environment.IsDevelopment() &&
+          context.Connection.RemoteIpAddress is { } address &&
+          System.Net.IPAddress.IsLoopback(address)))
+    {
+        context.Response.StatusCode = StatusCodes.Status404NotFound;
+        return;
+    }
+    await next(context);
+});
 app.UseMetricServer("/metrics");
 app.UseHttpMetrics();
 
@@ -45,8 +79,7 @@ app.MapGet("/weatherforecast", () =>
         .ToArray();
     return forecast;
 })
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+.WithName("GetWeatherForecast");
 
 app.Run();
 

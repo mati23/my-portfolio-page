@@ -1,0 +1,175 @@
+{
+  "date": "2026-09-07",
+  "platform": "linux/arm64 (Docker), macOS arm64 (browser and CLI)",
+  "tools": {
+    "node": "24.20.0",
+    "npm": "11.19.1",
+    "dotnet_sdk": "10.0.400",
+    "dotnet_runtime": "10.0.11",
+    "trivy": "0.74.0",
+    "gitleaks": "8.30.1",
+    "playwright": "1.63.0"
+  },
+  "npm": {
+    "npm": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "npm-production": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  },
+  "nuget": {
+    "sources": [
+      "https://api.nuget.org/v3/index.json"
+    ],
+    "vulnerabilities": 0
+  },
+  "scans": [
+    {
+      "name": "portfolio-backend-build-security",
+      "artifact": "portfolio-backend-build:security",
+      "imageId": "sha256:44ecbd1ce138409f8a7d8ad76187b65bd6d60d39e6f353637652e7ff1b31f183",
+      "vulnerabilities": 0,
+      "secrets": 0,
+      "misconfigurations": 0,
+      "targets": [
+        "portfolio-backend-build:security (alpine 3.24.1)",
+        "app/backend.deps.json",
+        "src/bin/Release/net10.0/backend.deps.json",
+        "src/packages.lock.json",
+        "usr/share/dotnet/sdk/10.0.400/Containers/tasks/net10.0/Microsoft.NET.Build.Containers.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/DotnetTools/dotnet-dev-certs/10.0.11-servicing.26373.116/tools/net10.0/any/dotnet-dev-certs.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/DotnetTools/dotnet-format/BuildHost-netcore/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/DotnetTools/dotnet-format/dotnet-format.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/DotnetTools/dotnet-user-jwts/10.0.11-servicing.26373.116/tools/net10.0/any/dotnet-user-jwts.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/DotnetTools/dotnet-user-secrets/10.0.11-servicing.26373.116/tools/net10.0/any/dotnet-user-secrets.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/DotnetTools/dotnet-watch/10.0.400/tools/net10.0/any/dotnet-watch.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/FSharp/fsc.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/FSharp/fsi.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/MSBuild.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/NuGet.CommandLine.XPlat.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Roslyn/Microsoft.Build.Tasks.CodeAnalysis.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Roslyn/bincore/VBCSCompiler.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Roslyn/bincore/csc.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Roslyn/bincore/vbc.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.Build.Tasks.Git/tools/net/Microsoft.Build.Tasks.Git.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.NET.Sdk.BlazorWebAssembly/tools/net10.0/Microsoft.NET.Sdk.BlazorWebAssembly.Tool.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.NET.Sdk.Razor/source-generators/Microsoft.CodeAnalysis.Razor.Compiler.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.NET.Sdk.Razor/tools/rzc.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.NET.Sdk.StaticWebAssets/tools/net10.0/Microsoft.NET.Sdk.StaticWebAssets.Tool.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.SourceLink.AzureRepos.Git/tools/net/Microsoft.SourceLink.AzureRepos.Git.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.SourceLink.Bitbucket.Git/tools/net/Microsoft.SourceLink.Bitbucket.Git.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.SourceLink.Common/tools/net/Microsoft.SourceLink.Common.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.SourceLink.GitHub/tools/net/Microsoft.SourceLink.GitHub.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.SourceLink.GitLab/tools/net/Microsoft.SourceLink.GitLab.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/datacollector.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/dotnet.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/redist.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/testhost.deps.json",
+        "usr/share/dotnet/sdk/10.0.400/vstest.console.deps.json",
+        "usr/share/dotnet/shared/Microsoft.AspNetCore.App/10.0.11/Microsoft.AspNetCore.App.deps.json",
+        "usr/share/dotnet/shared/Microsoft.NETCore.App/10.0.11/Microsoft.NETCore.App.deps.json"
+      ]
+    },
+    {
+      "name": "portfolio-backend-security",
+      "artifact": "portfolio-backend:security",
+      "imageId": "sha256:2ba220ebff06a9a57efef6647d7a2493006e52cca364c12eda69661b310028b7",
+      "vulnerabilities": 0,
+      "secrets": 0,
+      "misconfigurations": 0,
+      "targets": [
+        "portfolio-backend:security (alpine 3.24.1)",
+        "app/backend.deps.json",
+        "usr/share/dotnet/shared/Microsoft.AspNetCore.App/10.0.11/Microsoft.AspNetCore.App.deps.json",
+        "usr/share/dotnet/shared/Microsoft.NETCore.App/10.0.11/Microsoft.NETCore.App.deps.json"
+      ]
+    },
+    {
+      "name": "portfolio-frontend-build-security",
+      "artifact": "portfolio-frontend-build:security",
+      "imageId": "sha256:86d24c2e1ad0d0c8798f321c1e755dea1c069dbfceaf3d51c0c8f09994efa4aa",
+      "vulnerabilities": 0,
+      "secrets": 0,
+      "misconfigurations": 0,
+      "targets": [
+        "portfolio-frontend-build:security (alpine 3.24.1)",
+        "Node.js"
+      ]
+    },
+    {
+      "name": "portfolio-frontend-security",
+      "artifact": "portfolio-frontend:security",
+      "imageId": "sha256:7845c8570c9ddce3f339f31a22475bf511d6a84c8ed0f7ee1d3a811b13668caf",
+      "vulnerabilities": 0,
+      "secrets": 0,
+      "misconfigurations": 0,
+      "targets": [
+        "portfolio-frontend:security (alpine 3.24.1)"
+      ]
+    },
+    {
+      "name": "source",
+      "artifact": ".",
+      "imageId": null,
+      "vulnerabilities": 0,
+      "secrets": 0,
+      "misconfigurations": 0,
+      "targets": [
+        "backend/packages.lock.json",
+        "frontend/package-lock.json",
+        "backend/Dockerfile",
+        "frontend/Dockerfile"
+      ]
+    }
+  ],
+  "sha256": {
+    "frontend/package.json": "e42478b091e0bc8e71c1f5dc6f2c09a196843a831580a094192afc4dabea7a72",
+    "frontend/package-lock.json": "f51ec210d405e1ee57695f8ead081c11a5ffd48170b6a94823c96e45c58a779f",
+    "frontend/Dockerfile": "00aa1f14a13d5b6854b9d8ef8a361b46d6058e611ee12eef4f7ac074150dd794",
+    "frontend/nginx.conf": "6d85242d3aedae4c85249ea66972d2fea1f7f9055a46b4c279cd57a0c95178d2",
+    "backend/backend.csproj": "b8d0375ed20ac1704a5bc39f3353aff38046afd769a38e5380b393f3d565e489",
+    "backend/packages.lock.json": "e6a720b58ba7e38c95b05ccef7c02715043228b19393ed80609b6db836e506fb",
+    "backend/Dockerfile": "40b67268f83f8f6c0e1a569f7df83b8713c6c7d8c41f67d3b2d8c2b8ccefb4b7",
+    "frontend/vite.config.js": "48bc8a05d248d0f1630a0889cd3be9a1830b5e16d066f549149d2c28351e0a48",
+    "backend/Program.cs": "1f45b14b13bc87ddab2f0e108eaf9c70da7f2be5cd86fcc08575efdae35594a5",
+    "scripts/check-security.sh": "fd40e656c5810a44909478c211b69a46613801f3464817878567ceb647d231f7",
+    "scripts/test-backend.py": "84848403b8289d8c0c12ccf9aa52b9bc5aef9b042691d9cdfff9d15810b2a9b2",
+    ".github/workflows/security.yml": "296c9514d05c3e232cc6da4c2fdc5928794f4d0d92dc864039982d919d885dfd",
+    "frontend/tests/security-regression.spec.js": "e4d4ff3a998df9924fc942a925a4f10da839116ed77847d22fcdab5fb638556d"
+  },
+  "git_history": {
+    "commits": 36,
+    "secrets": 0
+  },
+  "browser_tests": {
+    "startTime": "2026-09-07T17:09:04.552Z",
+    "duration": 6117.474,
+    "expected": 16,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "api_tests": {
+    "Production": "passed",
+    "Development": "passed",
+    "checks": [
+      "health",
+      "weatherforecast contract",
+      "CORS",
+      "Swagger policy",
+      "metrics isolation and forged Host"
+    ]
+  },
+  "workflow_validation": "actionlint passed; remote CI not triggered"
+}
