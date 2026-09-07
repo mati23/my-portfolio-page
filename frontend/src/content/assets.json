@@ -1,0 +1,93 @@
+{
+  "books/habitos-atomicos/my-book": {
+    "width": 4624,
+    "height": 1512
+  },
+  "books/make-it-stick/my-book": {
+    "width": 3962,
+    "height": 1305
+  },
+  "books/o-livro-da-economia/my-book": {
+    "width": 6165,
+    "height": 1529
+  },
+  "books/o-mundo-assombrado-por-demonios/my-book": {
+    "width": 4452,
+    "height": 1589
+  },
+  "backgrounds/2019/album": {
+    "width": 1059,
+    "height": 1335,
+    "src": "/resources/backgrounds/2019/album.webp"
+  },
+  "backgrounds/2019/book": {
+    "width": 893,
+    "height": 1360,
+    "src": "/resources/backgrounds/2019/book.jpg"
+  },
+  "backgrounds/2019/game": {
+    "width": 1024,
+    "height": 1280,
+    "src": "/resources/backgrounds/2019/game.jpg"
+  },
+  "backgrounds/2019/movie": {
+    "width": 1381,
+    "height": 2048,
+    "src": "/resources/backgrounds/2019/movie.jpg"
+  },
+  "backgrounds/2019/song": {
+    "width": 695,
+    "height": 905,
+    "src": "/resources/backgrounds/2019/song.webp"
+  },
+  "backgrounds/2020/album": {
+    "width": 1425,
+    "height": 1425,
+    "src": "/resources/backgrounds/2020/album.jpg"
+  },
+  "backgrounds/2020/book": {
+    "width": 800,
+    "height": 1228,
+    "src": "/resources/backgrounds/2020/book.jpg"
+  },
+  "backgrounds/2020/game": {
+    "width": 443,
+    "height": 494,
+    "src": "/resources/backgrounds/2020/game.jpg"
+  },
+  "backgrounds/2020/movie": {
+    "width": 1061,
+    "height": 1500,
+    "src": "/resources/backgrounds/2020/movie.jpg"
+  },
+  "backgrounds/2020/song": {
+    "width": 607,
+    "height": 607,
+    "src": "/resources/backgrounds/2020/song.jpg"
+  },
+  "backgrounds/2021/album": {
+    "width": 665,
+    "height": 997,
+    "src": "/resources/backgrounds/2021/album.jpg"
+  },
+  "backgrounds/2021/book": {
+    "width": 1880,
+    "height": 2817,
+    "src": "/resources/backgrounds/2021/book.jpg"
+  },
+  "backgrounds/2021/game": {
+    "width": 763,
+    "height": 1147,
+    "src": "/resources/backgrounds/2021/game.jpg"
+  },
+  "backgrounds/2021/movie": {
+    "width": 455,
+    "height": 683,
+    "src": "/resources/backgrounds/2021/movie.jpg"
+  },
+  "backgrounds/2021/song": {
+    "width": 425,
+    "height": 640,
+    "src": "/resources/backgrounds/2021/song.jpg"
+  }
+}

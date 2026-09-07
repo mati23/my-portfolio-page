@@ -1,31 +1,13 @@
-@font-face {
-	font-family: "PlayFairItalic";
-	src: url("../../resources/fonts/TextFonts.net_robinson-press-font/Webfont/RobinsonPress.woff")
-		format("truetype");
-}
-
-@font-face {
-	font-family: "YanoneSemiBold";
-	src: url("../../resources/fonts/Yanone_Kaffeesatz/static/YanoneKaffeesatz-SemiBold.ttf")
-		format("truetype");
-}
-
-@font-face {
-	font-family: "YanoneRegular";
-	src: url("../../resources/fonts/Yanone_Kaffeesatz/static/YanoneKaffeesatz-Regular.ttf")
-		format("truetype");
-}
-
 .bookReview {
 	@apply flex flex-col items-center gap-4 bg-[#041b27] text-gray-300 text-justify;
 }
 
 .bookReview img {
-	@apply w-[80rem] rounded-lg 2xl:w-[90rem];
+	@apply w-[80rem] max-w-[95vw] h-auto rounded-lg 2xl:w-[90rem];
 }
 
 .bookTitle {
-	@apply mt-10 text-8xl text-center font-[PlayFairItalic];
+	@apply mt-10 text-5xl sm:text-7xl xl:text-8xl break-words text-center font-[Editorial];
 }
 
 .bookDescription {

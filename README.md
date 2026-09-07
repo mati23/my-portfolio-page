@@ -31,7 +31,7 @@ docker compose up --build -d
 docker compose --profile backend up --build -d
 ```
 
-Site: `http://localhost:4173`. NGINX serve apenas o build estático, com fallback para as rotas React. Vite preview é exclusivo para inspeção local (`npm --prefix frontend run preview`), não é usado em produção. HTTPS deve ser terminado no ingress/proxy da hospedagem.
+Site: `http://localhost:4173`. NGINX serve apenas o build estático, com HTML e metadados por rota e resposta HTTP 404 para endereços desconhecidos. Vite preview é exclusivo para inspeção local (`npm --prefix frontend run preview`), não é usado em produção. HTTPS deve ser terminado no ingress/proxy da hospedagem.
 
 A API opcional publica somente `127.0.0.1:5126`. Em produção, `/metrics` está disponível na porta **9464 da rede interna**, por exemplo `http://backend:9464/metrics` para um Prometheus na mesma rede. Não publique essa porta no host/ingress. A porta pública retorna 404 para métricas, inclusive quando o cabeçalho Host é adulterado. Em desenvolvimento, também é permitido coletar métricas pela porta local da API, em conexões loopback.
 
@@ -47,6 +47,7 @@ python3 scripts/test-backend.py
 docker run --rm -d --name portfolio-web-test -p 127.0.0.1:4173:4173 portfolio-frontend:security
 cd frontend
 npx playwright install chromium
+npm run test:unit
 npm run test:e2e
 docker stop portfolio-web-test
 ```
@@ -58,3 +59,5 @@ O script de segurança falha para qualquer severidade encontrada, sem `ignore-un
 Binários antigos, `obj` e dados locais do Prometheus deixaram de ser versionados e não entram no contexto de build. Os arquivos locais existentes foram preservados; nada foi reescrito no histórico Git.
 
 Consulte [o relatório de segurança](docs/seguranca/validacao-2026-09-07.md) e [o plano original](docs/planejamento/modernizacao.md).
+
+As correções de front-end, configuração opcional de domínio e regeneração dos assets estão documentadas em [Evolução do front-end](docs/frontend-evolution.md).

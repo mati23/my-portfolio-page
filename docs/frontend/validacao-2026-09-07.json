@@ -1,0 +1,98 @@
+{
+  "date": "2026-09-07",
+  "platform": "macOS arm64 / Docker linux arm64",
+  "tests": {
+    "unit": 4,
+    "production_browser": 42,
+    "development_strictmode": 8,
+    "backend": [
+      "Production",
+      "Development"
+    ]
+  },
+  "npm": {
+    "npm": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "npm-production": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    }
+  },
+  "trivy": {
+    "source": {
+      "artifact": ".",
+      "image_id": null,
+      "vulnerabilities": 0
+    },
+    "portfolio-frontend-build-security": {
+      "artifact": "portfolio-frontend-build:security",
+      "image_id": "sha256:6a39adc3cf1e9a7b2de735693f3303d82cb75bf790a8afb3860a1f25b9dbc723",
+      "vulnerabilities": 0
+    },
+    "portfolio-frontend-security": {
+      "artifact": "portfolio-frontend:security",
+      "image_id": "sha256:9ef6deecca5f0250558339b7f9ba877d5e4639cd8256a2fda4c005b65ef8d435",
+      "vulnerabilities": 0
+    },
+    "portfolio-backend-build-security": {
+      "artifact": "portfolio-backend-build:security",
+      "image_id": "sha256:44ecbd1ce138409f8a7d8ad76187b65bd6d60d39e6f353637652e7ff1b31f183",
+      "vulnerabilities": 0
+    },
+    "portfolio-backend-security": {
+      "artifact": "portfolio-backend:security",
+      "image_id": "sha256:2ba220ebff06a9a57efef6647d7a2493006e52cca364c12eda69661b310028b7",
+      "vulnerabilities": 0
+    }
+  },
+  "nuget": {
+    "version": 1,
+    "parameters": "--vulnerable --include-transitive",
+    "sources": [
+      "https://api.nuget.org/v3/index.json"
+    ],
+    "projects": [
+      {
+        "path": "/Users/mateusarruda/Documents/my-portfolio-page/backend/backend.csproj"
+      }
+    ]
+  },
+  "secrets": [],
+  "resources": {
+    "/": {
+      "before_bytes": 895357,
+      "after_bytes": 783112,
+      "reduction_percent": 12.5
+    },
+    "/bookreviews": {
+      "before_bytes": 2851329,
+      "after_bytes": 334967,
+      "reduction_percent": 88.3
+    },
+    "/bookreviews/make-it-stick": {
+      "before_bytes": 5895599,
+      "after_bytes": 501761,
+      "reduction_percent": 91.5
+    },
+    "/myfavourites": {
+      "before_bytes": 6832925,
+      "after_bytes": 4184513,
+      "reduction_percent": 38.8
+    },
+    "/myportfolio": {
+      "before_bytes": 1578938,
+      "after_bytes": 977526,
+      "reduction_percent": 38.1
+    }
+  }
+}

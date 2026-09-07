@@ -32,7 +32,7 @@ test("home retains navigation, desktop WebGL and mobile fallback", async ({ page
   await page.goto("/", { waitUntil: "networkidle" })
   await expect(page.getByText("Mateus Arruda", { exact: true })).toBeVisible()
   if (info.project.name === "mobile") {
-    await expect(page.locator('img[src="./ps2-screen.png"]')).toBeVisible()
+    await expect(page.locator('img[src="/ps2-screen.webp"]')).toBeVisible()
   } else {
     await expect(page.locator("canvas")).toHaveCount(1)
     expect(await page.locator("canvas").evaluate(canvas => canvas.width)).toBeGreaterThan(1)

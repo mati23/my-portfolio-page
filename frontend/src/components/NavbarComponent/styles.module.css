@@ -26,11 +26,7 @@
 	@apply hidden w-full md:block md:w-auto;
 }
 
-.button:focus ~ .navbarDefault {
-	@apply block;
-}
-
-.navbarDefault:active {
+.navbarDefault[data-open="true"] {
 	@apply block;
 }
 

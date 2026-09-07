@@ -8,9 +8,6 @@ export default defineConfig({
 	build: { target: ["es2020", "edge88", "firefox78", "chrome87", "safari14"] },
 	server: {
 		host: "127.0.0.1",
-		port: 8000,
-		watch: {
-			usePolling: true
-		}
+		port: 8000
 	}
 })
