@@ -111,6 +111,9 @@ test("reduced motion and unavailable WebGL avoid downloading the scene @lifecycl
 })
 
 test("WebGL releases contexts and animation callbacks across repeated mounts @lifecycle", async ({ page }) => {
+  // Three real mount/resize/dispose cycles can exceed 30s on software-rendered runners.
+  // Keep every resource assertion; this test checks lifecycle correctness, not FPS.
+  test.setTimeout(120_000)
   // Exercise the real scene at a smaller landscape size on software-rendered CI.
   await page.setViewportSize({ width: 800, height: 450 })
   await page.addInitScript(() => {
