@@ -71,3 +71,16 @@ No container, HTTP permanece interno e o ingress é responsável por TLS e pela 
 `Cors:AllowedOrigins` é uma string de origens separadas por ponto e vírgula, sem caminhos, barra final ou curingas. Em produção os defaults anteriores (`http://localhost:8000` e `https://localhost:8000`) foram preservados; Development também aceita `http://127.0.0.1:8000`, `http://localhost:4173` e `http://127.0.0.1:4173`. Para substituir toda a lista, configure `Cors__AllowedOrigins` no processo/container; uma string vazia desabilita a permissão cross-origin. O Compose ainda não encaminha essa variável automaticamente: use configuração de ambiente do serviço/override ou `docker run -e`. CORS não autentica chamadas à API.
 
 A opção de TLS no ingress segue a [orientação oficial do ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-10.0). Caso um deploy futuro precise consumir forwarded headers, os proxies confiáveis devem ser configurados explicitamente nessa entrega.
+
+### Organização e tratamento de erros
+
+O endpoint demonstrativo e seu modelo ficam em `backend/Features/Weather`; `Program.cs` compõe serviços e middleware. Exceções não tratadas retornam HTTP 500 com `application/problem+json`, título genérico e `traceId`, sem mensagem interna ou stack trace, inclusive em Development. Os logs de console são JSON com escopos e mantêm a exceção original; não devem ser expostos publicamente. Respostas normais, 404 e o contrato de forecast permanecem inalterados.
+
+Teste de falhas (Kestrel real em porta efêmera, sem pacotes adicionais):
+
+```sh
+dotnet restore tests/Backend.Errors/Backend.Errors.csproj --locked-mode
+dotnet run --no-restore --project tests/Backend.Errors/Backend.Errors.csproj
+```
+
+A rota de falha existe somente nesse executável de teste, fora do contexto Docker da API. O teste reutiliza o middleware do produto e verifica resposta genérica, logs, rastreamento e recuperação após exceções. Usa o [tratamento de exceções nativo do ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-10.0).

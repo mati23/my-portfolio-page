@@ -1,3 +1,5 @@
+using Portfolio.Api.Features.Weather;
+using Portfolio.Api.Infrastructure;
 using Prometheus;
 
 // Probe with the installed runtime; no external HTTP client is required.
@@ -16,6 +18,7 @@ if (args is ["--health-check"])
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHealthChecks();
+builder.Logging.AddJsonConsole(options => options.IncludeScopes = true);
 
 // A semicolon-separated value lets environment overrides replace the entire allowlist.
 var origins = (builder.Configuration["Cors:AllowedOrigins"] ?? "")
@@ -45,6 +48,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseApiErrors();
 
 // Health probes remain HTTP inside the container; TLS terminates at the ingress.
 app.UseHealthChecks("/health");
@@ -79,28 +83,6 @@ if (app.Environment.IsDevelopment())
 // Production TLS is terminated at the ingress. Direct HTTPS is explicitly opt-in.
 if (redirectHttps) app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.MapWeatherEndpoints();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

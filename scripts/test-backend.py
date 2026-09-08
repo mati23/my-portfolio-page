@@ -46,6 +46,7 @@ for environment, extra, allowed in (
         else:
             raise AssertionError("API did not become healthy")
 
+        assert request(base, "/failure")[0] == 404, "Test-only endpoint must not exist in the API"
         status, _, body = request(base, "/weatherforecast")
         assert status == 200
         forecast = json.loads(body)

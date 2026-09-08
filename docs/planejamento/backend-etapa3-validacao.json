@@ -1,0 +1,18 @@
+{
+  "date": "2026-09-08",
+  "image": "portfolio-backend:step3",
+  "image_id": "sha256:0f665647544db321ebfa30d1aa573baae12f309d623877d372fdf7a38eac0fd6",
+  "vulnerabilities": 0,
+  "error_tests": [
+    "Production: generic 500, content negotiation, traceId, exception logs, recovery and 404 passed",
+    "Development: generic 500, content negotiation, traceId, exception logs, recovery and 404 passed"
+  ],
+  "integration_tests": [
+    "Production: health, forecast, CORS, Swagger policy and metrics isolation passed",
+    "Development: health, forecast, CORS, Swagger policy and metrics isolation passed",
+    "Production: health, forecast, CORS, Swagger policy and metrics isolation passed",
+    "Explicit HTTPS: redirect target, untrusted forwarding headers and HTTP health passed",
+    "Invalid origin and missing redirect port rejected at startup"
+  ],
+  "remote_ci": "not run; local changes only"
+}
