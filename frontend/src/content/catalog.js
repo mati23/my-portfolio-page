@@ -19,7 +19,7 @@ export function validateBook(value) {
 export function validateYear(value) {
   if (!value || CATEGORIES.some(category => {
     const item = value[category]
-    return !item || !text(item.title) || typeof item.subtitle !== "string" || !text(item.description)
+    return !item || !text(item.title) || typeof item.subtitle !== "string" || !text(item.description) || !/^#[0-9a-f]{6}$/i.test(item.color ?? "")
   })) throw new ContentError("The favorites information is invalid.")
   return value
 }

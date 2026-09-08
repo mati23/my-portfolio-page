@@ -4,7 +4,7 @@ export default defineConfig({
   testDir: "./tests",
   testMatch: "**/*.spec.js",
   fullyParallel: true,
-  workers: 2,
+  workers: process.env.CI ? 1 : 2,
   reporter: [["list"], ["json", { outputFile: "test-results/results.json" }]],
   use: {
     baseURL: process.env.BASE_URL || "http://127.0.0.1:4173",

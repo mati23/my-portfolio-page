@@ -101,3 +101,13 @@ As métricas são acessadas por `http://backend:9464/metrics` na rede do projeto
 `python3 scripts/test-compose.py` constrói e testa projetos temporários com portas efêmeras: front-end sozinho, profile backend e duas instâncias simultâneas, incluindo health checks, rotas, headers, gzip e rede de métricas. Requer Docker com plugin Compose e remove somente os projetos de teste ao terminar. `COMPOSE_TEST_REPORT=/caminho/relatorio.json` grava os resultados e IDs das imagens. Os testes não substituem uma avaliação de TLS no ingress real.
 
 Referências: [isolamento por projeto no Compose](https://docs.docker.com/compose/how-tos/project-name/) e [compressão no NGINX](https://nginx.org/en/docs/http/ngx_http_gzip_module.html).
+
+### CI e atualizações de dependências
+
+O workflow executa em PRs, push na `main` e acionamento manual. A concorrência cancela execuções antigas do mesmo PR/ref; branches sem PR não disparam uma execução redundante. Inclui auditorias, lint das regras de hooks/dependências de efeitos, testes unitários, testes de erro da API, integração Compose e navegador. Relatórios de navegador e auditorias de pacotes/imagens ficam em artifacts por sete dias, inclusive em falhas; relatórios de scanner de segredos não são publicados como artifacts.
+
+`npm --prefix frontend run lint` executa o lint local. Na CI os testes de navegador usam um worker para evitar concorrência entre cenas WebGL renderizadas por software. O teste de ciclo de vida usa uma área menor, mantendo a cena real e as verificações de callbacks, contextos, resize e desmontagem; os demais testes desktop preservam o viewport padrão.
+
+As cores dos favoritos agora são conteúdo explícito (`color` hexadecimal no JSON anual), preservando a paleta aprovada registrada antes da modernização. Não são recalculadas no navegador: a quantização das mesmas imagens apresentou diferenças entre Linux e macOS. Ao adicionar uma categoria/ano, informe uma cor válida; o build e o carregamento validam esse campo. A dependência de extração de cores deixou de ser necessária. Os testes continuam usando o baseline independente existente.
+
+Dependabot está configurado para verificações semanais de npm, NuGet, Docker e GitHub Actions, com limite de dois PRs por entrada. Grupos pequenos reúnem minor/patch de pacotes relacionados; majors ficam separadas, sem automerge. SDK, `.nvmrc`, versões fixadas em scripts e digests precisam continuar alinhados ao revisar cada PR. A configuração entra em operação após merge na branch padrão e não substitui as auditorias da CI nem habilita automaticamente todas as opções de alertas de segurança do repositório.

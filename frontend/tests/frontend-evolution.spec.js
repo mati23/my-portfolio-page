@@ -96,6 +96,7 @@ test("reduced motion and unavailable WebGL avoid downloading the scene @lifecycl
   await expect(page.locator('img[src="/ps2-screen.webp"]')).toBeVisible()
   await expect(page.locator("canvas")).toHaveCount(0)
   expect(scripts.some(url => url.includes("initiateThreeJS"))).toBe(false)
+  await page.goto("about:blank")
   await page.emulateMedia({ reducedMotion: "no-preference" })
   await page.addInitScript(() => {
     const original = HTMLCanvasElement.prototype.getContext
@@ -104,13 +105,14 @@ test("reduced motion and unavailable WebGL avoid downloading the scene @lifecycl
     }
   })
   scripts.length = 0
-  await page.reload()
+  await page.goto("/")
   await expect(page.locator('img[src="/ps2-screen.webp"]')).toBeVisible()
   expect(scripts.some(url => url.includes("initiateThreeJS"))).toBe(false)
 })
 
 test("WebGL releases contexts and animation callbacks across repeated mounts @lifecycle", async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 800 })
+  // Exercise the real scene at a smaller landscape size on software-rendered CI.
+  await page.setViewportSize({ width: 800, height: 450 })
   await page.addInitScript(() => {
     const contexts = new Set(), frames = new Set()
     const getContext = HTMLCanvasElement.prototype.getContext
@@ -138,7 +140,7 @@ test("WebGL releases contexts and animation callbacks across repeated mounts @li
   for (let cycle = 0; cycle < 3; cycle++) {
     await expect(page.locator("canvas")).toHaveCount(1)
     await expect.poll(() => page.evaluate(() => window.sceneStats())).toEqual({ contexts: 1, frames: 1 })
-    await page.setViewportSize({ width: 1400 + cycle * 10, height: 850 })
+    await page.setViewportSize({ width: 820 + cycle * 10, height: 470 })
     await expect.poll(() => page.locator("canvas").evaluate(canvas => canvas.width)).toBeGreaterThan(1)
     expect(await page.locator("canvas").evaluate(canvas => canvas.width <= 1920 && canvas.height <= 1080)).toBe(true)
     await page.getByRole("link", { name: "Book Reviews", exact: true }).click()

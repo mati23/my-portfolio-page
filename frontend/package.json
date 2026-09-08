@@ -10,13 +10,10 @@
     "preview": "vite preview --host 0.0.0.0",
     "test:e2e": "playwright test",
     "audit:security": "npm audit --audit-level=low",
-    "test:unit": "node --test tests/unit/*.test.js"
+    "test:unit": "node --test tests/unit/*.test.js",
+    "lint": "eslint src --max-warnings=0"
   },
   "dependencies": {
-    "@vibrant/core": "4.0.4",
-    "@vibrant/generator-default": "4.0.4",
-    "@vibrant/image-browser": "4.0.4",
-    "@vibrant/quantizer-mmcq": "4.0.4",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-markdown": "10.1.0",
@@ -30,6 +27,8 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "6.1.1",
     "autoprefixer": "10.5.5",
+    "eslint": "10.10.0",
+    "eslint-plugin-react-hooks": "7.1.1",
     "postcss": "8.5.28",
     "tailwindcss": "3.4.19",
     "vite": "8.2.2"

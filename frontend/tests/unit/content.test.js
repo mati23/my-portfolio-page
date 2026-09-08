@@ -10,8 +10,9 @@ test("rejects unsupported slugs and incomplete content contracts", () => {
   assert.throws(() => validateBook({ ...book, bookName: 42 }))
   assert.throws(() => validateYear({ game: {} }))
   assert.equal(validateBook(book), book)
-  const year = Object.fromEntries(CATEGORIES.map(key => [key, { title: key, subtitle: "", description: "Description" }]))
+  const year = Object.fromEntries(CATEGORIES.map(key => [key, { title: key, subtitle: "", description: "Description", color: "#123abc" }]))
   assert.equal(validateYear(year), year)
+  assert.throws(() => validateYear({ ...year, game: { ...year.game, color: "red" } }))
 })
 test("rejects HTTP failures and HTML pretending to be Markdown", async t => {
   t.mock.method(globalThis, "fetch", async () => new Response("missing", { status: 404 }))

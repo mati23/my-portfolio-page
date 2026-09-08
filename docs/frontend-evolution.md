@@ -59,3 +59,7 @@ Medição local em Chrome, viewport 1280×800, nova página/contexto por rota, s
 | Portfólio | 1.578.938 B | 977.526 B | 38,1% |
 
 O chunk JavaScript inicial tem 188,97 kB (62,77 kB gzip); a cena Three.js fica em chunk separado de 463,46 kB (117,34 kB gzip), solicitado somente quando aplicável.
+
+## Atualização posterior — etapa 5 de backend/containers/CI
+
+Em 08/09/2026, a extração dinâmica das cores dos favoritos foi substituída por cores explícitas validadas no conteúdo anual, preservando a paleta do baseline. Isso elimina diferenças de quantização entre plataformas e remove Vibrant do runtime. As medições acima permanecem como registro da entrega anterior. Consulte `docs/planejamento/ci-etapa5-validacao.json` para os testes posteriores.
