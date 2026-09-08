@@ -1,4 +1,4 @@
-﻿{
+{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
@@ -26,7 +26,9 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7139;http://localhost:5126",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "HttpsRedirection__Enabled": "true",
+        "HttpsRedirection__Port": "7139"
       }
     },
     "IIS Express": {

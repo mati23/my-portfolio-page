@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-08",
+  "image": "portfolio-backend:step2",
+  "image_id": "sha256:9b17fbad14fc07544ad126b77129c2736d1cc0df2dbd0fbd6f23cc6e3b32e937",
+  "vulnerabilities": 0,
+  "tests": [
+    "Production: health, forecast, CORS, Swagger policy and metrics isolation passed",
+    "Development: health, forecast, CORS, Swagger policy and metrics isolation passed",
+    "Production: health, forecast, CORS, Swagger policy and metrics isolation passed",
+    "Explicit HTTPS: redirect target, untrusted forwarding headers and HTTP health passed",
+    "Invalid origin and missing redirect port rejected at startup"
+  ],
+  "scope": "Imagem final backend e integração HTTP; handshake TLS e ingress real não exercitados."
+}

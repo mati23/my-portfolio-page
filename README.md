@@ -61,3 +61,13 @@ Binários antigos, `obj` e dados locais do Prometheus deixaram de ser versionado
 Consulte [o relatório de segurança](docs/seguranca/validacao-2026-09-07.md) e [o plano original](docs/planejamento/modernizacao.md).
 
 As correções de front-end, configuração opcional de domínio e regeneração dos assets estão documentadas em [Evolução do front-end](docs/frontend-evolution.md).
+
+O ponto 5 está sendo executado em etapas no [roteiro de backend, containers e repositório](docs/planejamento/backend-containers-repositorio.md). Builds Docker recebem o domínio por `VITE_SITE_URL` como argumento de build; arquivos `.env` locais não entram nas imagens.
+
+### HTTP, HTTPS e CORS da API
+
+No container, HTTP permanece interno e o ingress é responsável por TLS e pela política de acesso público. `HttpsRedirection:Enabled` é `false` por padrão; não há interpretação automática de `X-Forwarded-*`. O profile `http` continua em 5126. Para HTTPS direto no desenvolvimento, configure/confie no certificado de desenvolvimento .NET e execute `dotnet run --project backend --launch-profile https`: esse profile escuta em 7139 e habilita o redirecionamento para essa porta. `/health` e a coleta interna de métricas permanecem em HTTP. Habilitar somente o redirecionamento não cria um listener HTTPS nem instala um certificado.
+
+`Cors:AllowedOrigins` é uma string de origens separadas por ponto e vírgula, sem caminhos, barra final ou curingas. Em produção os defaults anteriores (`http://localhost:8000` e `https://localhost:8000`) foram preservados; Development também aceita `http://127.0.0.1:8000`, `http://localhost:4173` e `http://127.0.0.1:4173`. Para substituir toda a lista, configure `Cors__AllowedOrigins` no processo/container; uma string vazia desabilita a permissão cross-origin. O Compose ainda não encaminha essa variável automaticamente: use configuração de ambiente do serviço/override ou `docker run -e`. CORS não autentica chamadas à API.
+
+A opção de TLS no ingress segue a [orientação oficial do ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-10.0). Caso um deploy futuro precise consumir forwarded headers, os proxies confiáveis devem ser configurados explicitamente nessa entrega.

@@ -1,6 +1,6 @@
 using Prometheus;
 
-// The runtime image intentionally has no shell or curl.
+// Probe with the installed runtime; no external HTTP client is required.
 if (args is ["--health-check"])
 {
     using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(2) };
@@ -17,11 +17,27 @@ if (args is ["--health-check"])
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHealthChecks();
 
-builder.Services.AddCors(options =>
+// A semicolon-separated value lets environment overrides replace the entire allowlist.
+var origins = (builder.Configuration["Cors:AllowedOrigins"] ?? "")
+    .Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+foreach (var origin in origins)
 {
-    options.AddPolicy("AllowFrontend", builder => builder.WithOrigins("http://localhost:8000", "https://localhost:8000")
-        .AllowAnyMethod().AllowAnyHeader());
-});
+    if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri) ||
+        (uri.Scheme != "http" && uri.Scheme != "https") ||
+        uri.Authority.Contains('*') || origin != uri.GetLeftPart(UriPartial.Authority))
+        throw new InvalidOperationException("Cors:AllowedOrigins must contain HTTP(S) origins without paths or trailing slashes.");
+}
+builder.Services.AddCors(options => options.AddPolicy("AllowFrontend", policy =>
+    policy.WithOrigins(origins).AllowAnyMethod().AllowAnyHeader()));
+
+var redirectHttps = builder.Configuration.GetValue<bool>("HttpsRedirection:Enabled");
+if (redirectHttps)
+{
+    var port = builder.Configuration.GetValue<int?>("HttpsRedirection:Port");
+    if (port is null or < 1 or > 65535)
+        throw new InvalidOperationException("HttpsRedirection:Port must be set to a valid HTTPS listener port.");
+    builder.Services.AddHttpsRedirection(options => options.HttpsPort = port);
+}
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -60,7 +76,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Production TLS is terminated at the ingress. Direct HTTPS is explicitly opt-in.
+if (redirectHttps) app.UseHttpsRedirection();
 
 var summaries = new[]
 {

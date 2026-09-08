@@ -10,3 +10,6 @@ backend/data/
 !.env.example
 .DS_Store
 security-reports/
+
+# Configuração local de IDEs
+.idea/
