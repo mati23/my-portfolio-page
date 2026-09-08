@@ -1,0 +1,35 @@
+{
+  "project": "portfolio-test-e4cdbc5003",
+  "checks": [
+    "frontend-only: health, routes, 404, CSP and lossless HTTP gzip",
+    "backend profile: health, contract, DNS, internal metrics, loopback and non-root users",
+    "two concurrent Compose projects without name or port conflicts"
+  ],
+  "compression": {
+    "/": {
+      "plain": 1072,
+      "gzip": 496
+    },
+    "/assets/index-DkXVc8po.js": {
+      "plain": 188977,
+      "gzip": 62655
+    }
+  },
+  "images": {
+    "frontend": "sha256:eb62bc4b48bb003c85296717b43343455099894aaa014c2f93aed1b031816dd6",
+    "backend": "sha256:cbdd4194985c9072475aee61b6fa0c10485f4c09d5f375637c9278133cd954a2"
+  },
+  "date": "2026-09-08",
+  "compose_version": "5.5.1",
+  "scans": {
+    "frontend": {
+      "image_id": "sha256:eb62bc4b48bb003c85296717b43343455099894aaa014c2f93aed1b031816dd6",
+      "vulnerabilities": 0
+    },
+    "backend": {
+      "image_id": "sha256:cbdd4194985c9072475aee61b6fa0c10485f4c09d5f375637c9278133cd954a2",
+      "vulnerabilities": 0
+    }
+  },
+  "cleanup": "Temporary project containers and networks removed; images retained."
+}

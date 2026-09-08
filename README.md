@@ -84,3 +84,20 @@ dotnet run --no-restore --project tests/Backend.Errors/Backend.Errors.csproj
 ```
 
 A rota de falha existe somente nesse executável de teste, fora do contexto Docker da API. O teste reutiliza o middleware do produto e verifica resposta genérica, logs, rastreamento e recuperação após exceções. Usa o [tratamento de exceções nativo do ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/error-handling?view=aspnetcore-10.0).
+
+### Instâncias isoladas com Compose
+
+As portas padrão continuam sendo 4173 (site) e 5126 (API opcional). `FRONTEND_PORT` e `BACKEND_PORT` alteram somente a porta publicada no host; a API permanece vinculada a `127.0.0.1`. `FRONTEND_BIND_ADDRESS` tem default `0.0.0.0`; use `127.0.0.1` para restringir o site ao computador local. Não existe mais nome fixo de container: o nome do projeto isola instâncias.
+
+```sh
+FRONTEND_BIND_ADDRESS=127.0.0.1 FRONTEND_PORT=4174 BACKEND_PORT=5127 \
+  docker compose -p portfolio-review --profile backend up --build -d --wait
+# Remove somente essa instância; não apaga imagens nem dados locais.
+docker compose -p portfolio-review --profile backend down
+```
+
+As métricas são acessadas por `http://backend:9464/metrics` na rede do projeto; a porta 9464 não é publicada no host. O NGINX comprime HTML, JavaScript, CSS e outros formatos textuais negociados com o cliente, enviando `Vary: Accept-Encoding`. Imagens WebP e fontes WOFF2 não são recomprimidas.
+
+`python3 scripts/test-compose.py` constrói e testa projetos temporários com portas efêmeras: front-end sozinho, profile backend e duas instâncias simultâneas, incluindo health checks, rotas, headers, gzip e rede de métricas. Requer Docker com plugin Compose e remove somente os projetos de teste ao terminar. `COMPOSE_TEST_REPORT=/caminho/relatorio.json` grava os resultados e IDs das imagens. Os testes não substituem uma avaliação de TLS no ingress real.
+
+Referências: [isolamento por projeto no Compose](https://docs.docker.com/compose/how-tos/project-name/) e [compressão no NGINX](https://nginx.org/en/docs/http/ngx_http_gzip_module.html).

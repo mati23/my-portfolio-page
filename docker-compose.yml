@@ -5,9 +5,8 @@ services:
       args:
         VITE_SITE_URL: ${VITE_SITE_URL:-}
       dockerfile: Dockerfile
-    container_name: frontend
     ports:
-      - "4173:4173"
+      - "${FRONTEND_BIND_ADDRESS:-0.0.0.0}:${FRONTEND_PORT:-4173}:4173"
     networks:
       - app-network
 
@@ -17,7 +16,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "127.0.0.1:5126:5126"
+      - "127.0.0.1:${BACKEND_PORT:-5126}:5126"
     expose:
       - "9464"
     networks:
